@@ -7,22 +7,36 @@ public class Demo {
 
 
         User user = new User(1, "Andrey", "aaa1");
-        User user1 = new User(2, "Ann", "aaa2");
-        User user2 = new User(3, "Ihor", "aaa3");
+        User user1 = new User(2, "Ann", null);
+        User user2 = new User(0, "Ihor", "aaa3");
         User user3 = new User(4, null, "aaa4");
         User user4 = null;
 
         User[] users = new User[]{user, user1, user2, user3, user4};
+        User[] users1 = null;
         UserRepository userRepository = new UserRepository(users);
+        UserRepository userRepository1 = new UserRepository(users1);
+
 
         System.out.println(Arrays.toString(userRepository.getUserNames()));
         System.out.println(Arrays.toString(userRepository.getUsers()));
         System.out.println(Arrays.toString(userRepository.getUserIds()));
 
+        System.out.println(Arrays.toString(userRepository1.getUserNames()));
+        System.out.println(Arrays.toString(userRepository1.getUsers()));
+        System.out.println(Arrays.toString(userRepository1.getUserIds()));
 
-        userRepository.findById(4);
-        userRepository.getUserByName("Ihor");
-        userRepository.delete(4);
+        userRepository.findById(2);
+        userRepository.getUserByName(null);
+        userRepository.delete(2);
+
+        userRepository1.findById(2);
+        userRepository1.getUserByName(null);
+        userRepository1.delete(2);
+        userRepository1.getUserById(2);
+        userRepository1.getUserBySessionId(null);
+        userRepository1.save(user4);
+
 
     }
 }

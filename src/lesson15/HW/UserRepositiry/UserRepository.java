@@ -16,6 +16,7 @@ public class UserRepository {
 
     private int countArrInd() {
         int count = 0;
+        if (users != null)
         for (User user : users) {
             if (user != null)
                 count++;
@@ -43,7 +44,7 @@ public class UserRepository {
 
     public String getUserNameById(long id) {
         String name = null;
-        if (users != null)
+        if (users == null)
             for (int i = 0; i < countArrInd(); i++) {
                 if (users[i] != null && users[i].getId() == id)
                     name = users[i].getName();
@@ -52,7 +53,7 @@ public class UserRepository {
     }
 
     public User getUserByName(String name) {
-        if (users != null)
+        if (users == null)
             for (int i = 0; i < countArrInd(); i++) {
                 if (users[i] != null && users[i].getName().equals(name))
                     return users[i];
@@ -60,8 +61,10 @@ public class UserRepository {
         return null;
     }
 
+
+
     public User getUserById(long id) {
-        if (users != null)
+        if (users == null)
             for (int i = 0; i < countArrInd(); i++) {
                 if (users[i] != null && users[i].getId() == id)
                     return users[i];
@@ -70,7 +73,7 @@ public class UserRepository {
     }
 
     public User getUserBySessionId(String sessionId) {
-        if (users != null)
+        if (users == null)
             for (int i = 0; i < countArrInd(); i++) {
                 if (users[i] != null && users[i].getSessionId().equals(sessionId))
                     return users[i];
@@ -79,7 +82,7 @@ public class UserRepository {
     }
 
     public User findById(long id) {
-        if (users != null)
+        if (users == null)
             for (int i = 0; i < countArrInd(); i++) {
                 if (users[i] != null && users[i].getId() == id )
                     return users[i];
@@ -100,7 +103,7 @@ public class UserRepository {
     }
 
     public User update(User user) {
-        if (user != null && findById(user.getId()) != null) {
+        if (user == null && findById(user.getId()) != null) {
             for (int i = 0; i < users.length; i++) {
                 if (users[i].getId() == user.getId()) {
                     users[i] = user;
