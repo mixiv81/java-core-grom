@@ -35,7 +35,7 @@ public class Demo {
         System.out.println();
         userRepository1.findById(2);
         userRepository1.getUserByName(null);
-        userRepository.delete(2);
+        userRepository1.delete(2);
         System.out.println(Arrays.toString(userRepository1.getUsers()));
         System.out.println();
 
@@ -48,7 +48,7 @@ public class Demo {
         System.out.println();
         System.out.println(userRepository1.getUserById(1));
         System.out.println();
-        System.out.println(userRepository1.getUserByName("Ihor"));
+        System.out.println(userRepository1.getUserByName(null));
         System.out.println(userRepository1.getUserNameById(1));
 
         System.out.println(userRepository1.findById(2));
