@@ -16,5 +16,13 @@ public class Demo {
         UserRepository userRepository = new UserRepository(users);
 
         System.out.println(Arrays.toString(userRepository.getUserNames()));
+        System.out.println(Arrays.toString(userRepository.getUsers()));
+        System.out.println(Arrays.toString(userRepository.getUserIds()));
+
+
+        userRepository.findById(4);
+        userRepository.getUserByName("Ihor");
+        userRepository.delete(4);
+
     }
 }
