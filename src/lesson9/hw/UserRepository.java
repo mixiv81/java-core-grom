@@ -7,16 +7,20 @@ public class UserRepository {
         this.users = users;
     }
 
+    public UserRepository() {
+    }
+
     public User[] getUsers() {
         return users;
     }
 
     private int countArrInd() {
         int count = 0;
-        for (User user : users) {
-            if (user != null)
-                count++;
-        }
+        if (users != null)
+            for (User user : users) {
+                if (user != null)
+                    count++;
+            }
         return count;
     }
 
@@ -49,13 +53,16 @@ public class UserRepository {
     }
 
     public User getUserByName(String name) {
-        if (users != null)
+        if (name != null) {
             for (int i = 0; i < countArrInd(); i++) {
-                if (users[i] != null && users[i].getName() == name)
+                if (users[i] != null && users[i].getName().equals(name))
                     return users[i];
             }
+        }
         return null;
     }
+
+
 
     public User getUserById(long id) {
         if (users != null)
@@ -78,7 +85,7 @@ public class UserRepository {
     public User findById(long id) {
         if (users != null)
             for (int i = 0; i < countArrInd(); i++) {
-                if (users[i].getId() == id)
+                if (users[i] != null && users[i].getId() == id )
                     return users[i];
             }
         return null;
@@ -109,10 +116,12 @@ public class UserRepository {
     }
 
     public void delete(long id) {
-        User user = findById(id);
-        for (int i = 0; i < users.length; i++) {
-            if (users[i] == user) {
-                users[i] = null;
+        if (users != null) {
+            User user = findById(id);
+            for (int i = 0; i < users.length; i++) {
+                if (users[i] == user) {
+                    users[i] = null;
+                }
             }
         }
     }

@@ -13,6 +13,7 @@ public class User {
         this.sessionId = sessionId;
     }
 
+
     public long getId() {
         return id;
     }
