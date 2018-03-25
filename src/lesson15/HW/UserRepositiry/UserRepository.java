@@ -84,7 +84,7 @@ public class UserRepository {
 
     public User findById(long id) {
         if (users != null)
-            for (int i = 0; i < countArrInd(); i++) {
+            for (int i = 0; i < users.length; i++) {
                 if (users[i] != null && users[i].getId() == id)
                     return users[i];
             }
@@ -93,7 +93,7 @@ public class UserRepository {
 
     public User save(User user) {
         if (user != null && findById(user.getId()) == null) {
-            for (int i = 0; i < users.length; i++) {
+            for (int i = 0; i < countArrInd(); i++) {
                 if (users[i] == null) {
                     users[i] = user;
                     return users[i];

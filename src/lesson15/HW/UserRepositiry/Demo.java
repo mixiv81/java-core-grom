@@ -15,7 +15,7 @@ public class Demo {
         User user6 = new User(5, "Ihor", "aaa4");
 
 
-        User[] users = new User[]{user, user1, user2, user3, null};
+        User[] users = new User[]{user, user1, user2, user3, null, user4};
         User[] users1 = null;
         UserRepository userRepository = new UserRepository(users);
         UserRepository userRepository1 = new UserRepository(users1);
@@ -29,27 +29,30 @@ public class Demo {
         System.out.println(Arrays.toString(userRepository1.getUsers()));
         System.out.println(Arrays.toString(userRepository1.getUserIds()));
 
-        System.out.println(userRepository.findById(2));
-        userRepository.getUserByName(null);
-        userRepository.delete(2);
+        System.out.println(userRepository1.findById(2));
+        userRepository1.getUserByName(null);
+        userRepository1.delete(2);
         System.out.println();
         userRepository1.findById(2);
         userRepository1.getUserByName(null);
         userRepository.delete(2);
-        System.out.println(Arrays.toString(userRepository.getUsers()));
+        System.out.println(Arrays.toString(userRepository1.getUsers()));
         System.out.println();
 
         userRepository1.getUserBySessionId(null);
         System.out.println();
-        userRepository.save(user5);
-        System.out.println(Arrays.toString(userRepository.getUsers()));
-        userRepository.update(user6);
-        System.out.println(Arrays.toString(userRepository.getUsers()));
+        userRepository1.save(user4);
+        System.out.println(Arrays.toString(userRepository1.getUsers()));
+        userRepository1.update(user4);
+        System.out.println(Arrays.toString(userRepository1.getUsers()));
         System.out.println();
-        System.out.println(userRepository.getUserById(1));
+        System.out.println(userRepository1.getUserById(1));
         System.out.println();
-        System.out.println(userRepository.getUserByName("Ihor"));
-        System.out.println(userRepository.getUserNameById(1));
+        System.out.println(userRepository1.getUserByName("Ihor"));
+        System.out.println(userRepository1.getUserNameById(1));
+
+        System.out.println(userRepository1.findById(2));
+
 
     }
 }
