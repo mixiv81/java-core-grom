@@ -7,6 +7,9 @@ public class UserRepository {
         this.users = users;
     }
 
+    public UserRepository() {
+    }
+
     public User[] getUsers() {
         return users;
     }
