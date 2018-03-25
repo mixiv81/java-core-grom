@@ -17,17 +17,17 @@ public class UserRepository {
     private int countArrInd() {
         int count = 0;
         if (users != null)
-        for (User user : users) {
-            if (user != null)
-                count++;
-        }
+            for (User user : users) {
+                if (user != null)
+                    count++;
+            }
         return count;
     }
 
     public User findById(long id) {
         if (users != null)
             for (int i = 0; i < countArrInd(); i++) {
-                if (users[i] != null && users[i].getId() == id )
+                if (users[i] != null && users[i].getId() == id)
                     return users[i];
             }
         return null;
@@ -48,7 +48,7 @@ public class UserRepository {
     public User update(User user) {
         if (user != null && findById(user.getId()) != null) {
             for (int i = 0; i < users.length; i++) {
-                if (users[i].equals(user)) {
+                if (users[i] != null && users[i].getId() == user.getId()) {
                     users[i] = user;
                     return users[i];
                 }
@@ -61,7 +61,7 @@ public class UserRepository {
         if (users != null) {
             User user = findById(id);
             for (int i = 0; i < users.length; i++) {
-                if (users[i] == user) {
+                if (users[i] != null && users[i].equals(user) && users[i].hashCode() == user.hashCode()) {
                     users[i] = null;
                 }
             }

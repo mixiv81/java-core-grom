@@ -29,15 +29,15 @@ public class Demo {
         System.out.println(Arrays.toString(userRepository1.getUsers()));
      //   System.out.println(Arrays.toString(userRepository1.getUserIds()));
 
-        userRepository.findById(2);
+        System.out.println(userRepository.findById(2));
       //  userRepository.getUserByName(null);
         userRepository.delete(2);
         System.out.println();
-        userRepository1.findById(2);
+        //userRepository1.findById(2);
        // userRepository1.getUserByName(null);
         userRepository.delete(2);
         System.out.println(Arrays.toString(userRepository.getUsers()));
-        System.out.println();
+        //System.out.println();
 
        // userRepository1.getUserBySessionId(null);
         System.out.println();
