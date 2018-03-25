@@ -1,7 +1,7 @@
 package lesson13;
 
-import lesson9.HW.User;
-import lesson9.HW.UserRepository;
+import lesson9.hw.User;
+import lesson9.hw.UserRepository;
 
 import java.util.Arrays;
 

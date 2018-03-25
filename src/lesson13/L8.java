@@ -1,8 +1,8 @@
 package lesson13;
 
 
-import lesson8.ArithmeticAdd.Adder;
-import lesson8.ArithmeticAdd.Arithmetic;
+import lesson8.arithmeticAdd.Adder;
+import lesson8.arithmeticAdd.Arithmetic;
 
 
 public class L8 {
