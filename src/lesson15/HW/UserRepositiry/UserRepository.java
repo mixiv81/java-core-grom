@@ -14,8 +14,9 @@ public class UserRepository {
         return users;
     }
 
-    private int countArrInd() {
+    public int countArrInd() {
         int count = 0;
+        if (users != null)
         for (User user : users) {
             if (user != null)
                 count++;
