@@ -14,6 +14,15 @@ public class UserRepository {
         return users;
     }
 
+    private int countArrInd() {
+        int count = 0;
+        for (User user : users) {
+            if (user != null)
+                count++;
+        }
+        return count;
+    }
+
     public User findById(long id) {
         if (users != null)
             for (User user : users) {
