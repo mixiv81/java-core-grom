@@ -14,7 +14,7 @@ public class StringCompare {
         String s2 = "test";
         System.out.println(s1 == s2);
 
-        String  s3 = new String("pppp");
+        String s3 = new String("pppp");
         String s4 = "pppp";
         System.out.println(s3 == s4);
 
@@ -22,8 +22,8 @@ public class StringCompare {
         System.out.println(s3 == s4);
 
 
-       String str = "testStringVar";
+        String str = "testStringVar";
         System.out.println(Arrays.toString(str.getBytes()));
-        System.out.println(new String (str.getBytes()));
+        System.out.println(new String(str.getBytes()));
     }
 }
