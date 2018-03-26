@@ -11,7 +11,7 @@ public class Demo {
         User user2 = new User(0, "Ihor", "aaa3");
         User user3 = new User(4, null, "aaa4");
         User user4 = null;
-        User user5 = new User(5, null, "aaa5");
+        User user5 = new User(5, null, null);
         User user6 = new User(5, "Ihor", "aaa4");
 
 
@@ -19,40 +19,41 @@ public class Demo {
         User[] users1 = null;
         UserRepository userRepository = new UserRepository(users);
         UserRepository userRepository1 = new UserRepository(users1);
-
-
-        System.out.println(Arrays.toString(userRepository.getUserNames()));
+        System.out.println(".................find.....................");
+        System.out.println(userRepository.findById(2));
+        System.out.println(userRepository.findById(6));
+        System.out.println(userRepository1.findById(0));
+        System.out.println("................getUsers................");
         System.out.println(Arrays.toString(userRepository.getUsers()));
-        System.out.println(Arrays.toString(userRepository.getUserIds()));
-
-        System.out.println(Arrays.toString(userRepository1.getUserNames()));
         System.out.println(Arrays.toString(userRepository1.getUsers()));
-        System.out.println(Arrays.toString(userRepository1.getUserIds()));
-
-        System.out.println(userRepository1.findById(2));
-        userRepository1.getUserByName(null);
-        userRepository1.delete(2);
-        System.out.println();
-        userRepository1.findById(2);
-        userRepository1.getUserByName(null);
-        userRepository1.delete(2);
+        System.out.println(".................save.....................");
+        System.out.println(userRepository.save(user4));
+        System.out.println(userRepository.save(user5));
+        System.out.println(Arrays.toString(userRepository.getUsers()));
+        System.out.println(userRepository1.save(user4));
+        System.out.println(userRepository1.save(user5));
+        System.out.println(userRepository1.save(user6));
         System.out.println(Arrays.toString(userRepository1.getUsers()));
-        System.out.println();
-
-        userRepository1.getUserBySessionId(null);
-        System.out.println();
-        userRepository1.save(user4);
+        System.out.println(".............update.....................");
+        System.out.println(userRepository.update(user4));
+        System.out.println(userRepository.update(user5));
+        System.out.println(userRepository.update(user6));
+        System.out.println(Arrays.toString(userRepository.getUsers()));
+        System.out.println(userRepository1.update(user4));
+        System.out.println(userRepository1.update(user5));
+        System.out.println(userRepository1.update(user6));
         System.out.println(Arrays.toString(userRepository1.getUsers()));
-        userRepository1.update(user4);
+        System.out.println("...........delete...................");
+        userRepository.delete(5);
+        userRepository.delete(10);
+        System.out.println(Arrays.toString(userRepository.getUsers()));
+        userRepository1.delete(5);
+        userRepository1.delete(10);
         System.out.println(Arrays.toString(userRepository1.getUsers()));
-        System.out.println();
-        System.out.println(userRepository1.getUserById(1));
-        System.out.println();
-        System.out.println(userRepository1.getUserByName(null));
-        System.out.println(userRepository1.getUserNameById(1));
-
-        System.out.println(userRepository1.findById(2));
-
-
+        System.out.println("...........count.....................");
+        System.out.println(userRepository.countArrInd());
+        System.out.println(userRepository1.countArrInd());
+        
     }
 }
+
