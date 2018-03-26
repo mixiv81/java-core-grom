@@ -6,6 +6,9 @@ public class TripAdvisorAPI implements API {
     public TripAdvisorAPI(Room[] rooms) {
         this.rooms = rooms;
     }
+    
+        public TripAdvisorAPI() {
+    }
 
     @Override
     public Room[] findRooms(int price, int persons, String city, String hotel) {

@@ -6,7 +6,9 @@ public class Controller {
     public Controller(API[] apis) {
         this.apis = apis;
     }
-
+    
+ public Controller() {
+    }
 
     public Room[] requestRooms(int price, int persons, String city, String hotel) {
         int countInd = 0;
