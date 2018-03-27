@@ -27,4 +27,31 @@ public class Solution {
         }
         return true;
     }
+
+    public String findArrNum(String input) {
+        if (input == null)
+            return null;
+        if (input.isEmpty())
+            return null;
+        int[] numbersOfLetters = new int[countWords(input)];
+        String[] strings = input.split(" ");
+        int count = 0;
+        for (String string : strings) {
+            if (checkNumbersAndSymbols(string)) {
+                numbersOfLetters[count] = string.length();
+                count++;
+            }
+        }
+        int max = 0;
+        for (int numbersOfLetter : numbersOfLetters) {
+            if (numbersOfLetter > max)
+                max = numbersOfLetter;
+        }
+
+        for (String string : strings) {
+            if (string.length() == max)
+                return string;
+        }
+        return null;
+    }
 }
