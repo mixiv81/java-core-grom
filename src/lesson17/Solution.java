@@ -20,24 +20,24 @@ public class Solution {
             return null;
         if (input.isEmpty())
             return null;
-        String input1 = input.trim();
-        String[] strings = input1.split(" ");
-        String firstWord = "";
+        String[] strings = input.split(" ");
+        String findWord = "";
         for (String string : strings) {
             if (checkNumbersAndSymbols(string)) {
-                firstWord = string;
+                findWord = string;
                 break;
             }
         }
-        int max = firstWord.length();
-        String res = "";
+        if (findWord.equals(""))
+            return null;
+        int max = findWord.length();
         for (String string : strings) {
             if (checkNumbersAndSymbols(string) && string.length() >= max) {
                 max = string.length();
-                res = string;
+                findWord = string;
             }
         }
-        return res;
+        return findWord;
     }
 
     public String minWord(String input) {
