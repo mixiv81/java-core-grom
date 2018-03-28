@@ -14,24 +14,22 @@ public class Solution {
         }
         return count;
     }
-    
+
     public String maxWord(String input) {
         if (input == null)
             return null;
         if (input.isEmpty())
             return null;
         String[] strings = input.split(" ");
+        String res = "";
         int max = 0;
-        for (int numbersOfLetter : findArrNumbers(input)) {
-            if (numbersOfLetter > max)
-                max = numbersOfLetter;
-        }
-
         for (String string : strings) {
-            if (string.length() == max)
-                return string;
+            if (checkNumbersAndSymbols(string) && string.length() > max) {
+                max = string.length();
+                res = string;
+            }
         }
-        return null;
+        return res;
     }
 
     public String minWord(String input) {
@@ -40,41 +38,24 @@ public class Solution {
         if (input.isEmpty())
             return null;
         String[] strings = input.split(" ");
-        int min = findArrNumbers(input)[0];
-        for (int i = 0; i < findArrNumbers(input).length; i++) {
-            if (findArrNumbers(input)[i] < min)
-                min = findArrNumbers(input)[i];
-        }
-
+        String res = "";
+        int min = Integer.MAX_VALUE;
         for (String string : strings) {
-            if (string.length() == min)
-                return string;
-        }
-        return null;
-    }
-
-    private int[] findArrNumbers(String input) {
-        if (input == null)
-            return null;
-        if (input.isEmpty())
-            return null;
-        int[] numbersOfLetters = new int[countWords(input)];
-        String[] strings = input.split(" ");
-        int count = 0;
-        for (String string : strings) {
-            if (checkNumbersAndSymbols(string)) {
-                numbersOfLetters[count] = string.length();
-                count++;
+            if (checkNumbersAndSymbols(string) && string.length() < min) {
+                min = string.length();
+                res = string;
             }
         }
-        return numbersOfLetters;
+        return res;
     }
+
+
     private boolean checkNumbersAndSymbols(String input) {
         if (input == null)
             return false;
         if (input.isEmpty())
             return false;
-        for (int i = 0; i < input.length(); i++){
+        for (int i = 0; i < input.length(); i++) {
             if (!Character.isLetter(input.charAt(i)))
                 return false;
         }
