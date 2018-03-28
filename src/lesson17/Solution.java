@@ -20,11 +20,12 @@ public class Solution {
             return null;
         if (input.isEmpty())
             return null;
-        String[] strings = input.split(" ");
+        String input1 = input.trim();
+        String[] strings = input1.split(" ");
         String res = "";
-        int max = Integer.MIN_VALUE;
+        int max = 0;
         for (String string : strings) {
-            if (checkNumbersAndSymbols(string) && string.length() > max) {
+            if (checkNumbersAndSymbols(string) && string.length() >= max) {
                 max = string.length();
                 res = string;
             }
