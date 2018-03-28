@@ -7,11 +7,13 @@ public class Demo {
 
         Solution solution = new Solution();
 
-        String test = "   There is Test    something new or jot sdf sdf sdf word Test op or";
-        String test1 =null;
-        String test2 = "p  opo rn";
+        String test = "   There is Test  5  somethi9ng new or jot somet)hing sdf sdf sdf word Test op or";
+        String test1 = null;
+        String test2 = "popor n";
         String test3 = "";
-        String test4 = "   The7re is Test    something new or jot s/df sdf sdf word Test op or";
+        String test4 = "   The7re i/s Test    something new or jot s/df something sdf sdf word Test op or";
+        String test5 = null + " hfgh ";
+
 
         System.out.println("------------ countWords--------------");
         System.out.println(solution.countWords(test));
@@ -26,16 +28,23 @@ public class Demo {
         System.out.println(solution.checkNumbersAndSymbols(test2));
         System.out.println(solution.checkNumbersAndSymbols(test3));
         System.out.println(solution.checkNumbersAndSymbols(test4));
-        //System.out.println(test2.length());
-       //System.out.println(Arrays.toString(solution.maxWord(test)));
-        //System.out.println(Arrays.toString(solution.maxWord(test4)));
+        System.out.println(test2.length());
 
-        System.out.println(solution.findArrNum(test));
-        System.out.println(solution.findArrNum(test1));
-        System.out.println(solution.findArrNum(test2));
-        System.out.println(solution.findArrNum(test3));
+        System.out.println("------------maxWord----------");
+        System.out.println(solution.maxWord(test));
+        System.out.println(solution.maxWord(test1));
+        System.out.println(solution.maxWord(test2));
+        System.out.println(solution.maxWord(test3));
+        System.out.println(solution.maxWord(test4));
+        System.out.println(solution.maxWord(test5));
 
-
+        System.out.println("------------minWord----------");
+        System.out.println(solution.minWord(test));
+        System.out.println(solution.minWord(test1));
+        System.out.println(solution.minWord(test2));
+        System.out.println(solution.minWord(test3));
+        System.out.println(solution.minWord(test4));
+        System.out.println(solution.minWord(test5));
 
 //solution.countLetters(test2);
     }
