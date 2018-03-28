@@ -30,7 +30,7 @@ public class Solution {
         if (findWord.equals(""))
             return null;
         else
-        return findWord;
+            return findWord;
     }
 
     public String minWord(String input) {
@@ -39,17 +39,21 @@ public class Solution {
         if (input.isEmpty())
             return null;
         String[] strings = input.split(" ");
-        String res = "";
-        int min = Integer.MAX_VALUE;
+        String findWord = "";
         for (String string : strings) {
-            if (checkNumbersAndSymbols(string) && string.length() < min) {
-                min = string.length();
-                res = string;
+            if (checkNumbersAndSymbols(string)) {
+                findWord = string;
             }
         }
-        return res;
+        if (findWord.equals(""))
+            return null;
+        for (String string : strings) {
+            if (checkNumbersAndSymbols(string) && findWord.length() > string.length()) {
+                findWord = string;
+            }
+        }
+        return findWord;
     }
-
 
     private boolean checkNumbersAndSymbols(String input) {
         if (input == null)
