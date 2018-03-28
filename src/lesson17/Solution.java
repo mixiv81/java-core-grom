@@ -22,8 +22,15 @@ public class Solution {
             return null;
         String input1 = input.trim();
         String[] strings = input1.split(" ");
+        String firstWord = "";
+        for (String string : strings) {
+            if (checkNumbersAndSymbols(string)) {
+                firstWord = string;
+                break;
+            }
+        }
+        int max = firstWord.length();
         String res = "";
-        int max = 0;
         for (String string : strings) {
             if (checkNumbersAndSymbols(string) && string.length() >= max) {
                 max = string.length();
