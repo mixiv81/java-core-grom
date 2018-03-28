@@ -22,7 +22,7 @@ public class Solution {
             return null;
         String[] strings = input.split(" ");
         String res = "";
-        int max = 0;
+        int max = Integer.MIN_VALUE;
         for (String string : strings) {
             if (checkNumbersAndSymbols(string) && string.length() > max) {
                 max = string.length();
