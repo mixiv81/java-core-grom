@@ -23,20 +23,13 @@ public class Solution {
         String[] strings = input.split(" ");
         String findWord = "";
         for (String string : strings) {
-            if (checkNumbersAndSymbols(string)) {
+            if (checkNumbersAndSymbols(string) && string.length() >= findWord.length()) {
                 findWord = string;
-                break;
             }
         }
         if (findWord.equals(""))
             return null;
-        int max = findWord.length();
-        for (String string : strings) {
-            if (checkNumbersAndSymbols(string) && string.length() >= max) {
-                max = string.length();
-                findWord = string;
-            }
-        }
+        else
         return findWord;
     }
 
