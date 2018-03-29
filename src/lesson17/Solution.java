@@ -60,12 +60,13 @@ public class Solution {
             return null;
         if (input.isEmpty())
             return null;
-        String[] strings = input.split(" ");
+        String[] strings = input.trim().split(" ");
         String findWord = "";
         int max = 0;
         for (String string : strings) {
-            if (checkNumbersAndSymbols(string) && countDuplicates(string, strings) >= max) {
+            if (checkNumbersAndSymbols(string) && countDuplicates(string, strings) > max) {
                 findWord = string;
+                max = countDuplicates(string, strings);
             }
         }
         if (!findWord.equals(""))
@@ -74,12 +75,10 @@ public class Solution {
             return null;
     }
 
-    public int countDuplicates(String string, String[] strings) {
+    private int countDuplicates(String string, String[] strings) {
         if (string == null)
             return 0;
         if (string.isEmpty())
-            return 0;
-        if (strings == null)
             return 0;
         int count = -1;
         for (String stringElem : strings) {
