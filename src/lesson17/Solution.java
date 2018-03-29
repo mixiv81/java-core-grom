@@ -60,17 +60,21 @@ public class Solution {
             return null;
         if (input.isEmpty())
             return null;
-        String[] strings = input.trim().split(" ");
+        String[] strings = input.toLowerCase().split(" ");
+        if (strings.length <2)
+            return null;
         String findWord = "";
-        int max = 1;
+        int max = 0;
         for (String string : strings) {
-            if (checkNumbersAndSymbols(string) && countDuplicates(string, strings) > max) {
+            if (checkNumbersAndSymbols(string) && countDuplicates(string, strings) >= max) {
                 findWord = string;
                 max = countDuplicates(string, strings);
             }
-
         }
-        return findWord;
+        if (!findWord.equals(""))
+            return findWord;
+        else
+            return null;
     }
 
     private int countDuplicates(String string, String[] strings) {
