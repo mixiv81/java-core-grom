@@ -64,9 +64,9 @@ public class Solution {
         if (strings.length <2)
             return null;
         String findWord = "";
-        int max = 0;
+        int max = 1;
         for (String string : strings) {
-            if (checkNumbersAndSymbols(string) && countDuplicates(string, strings) >= max) {
+            if (checkNumbersAndSymbols(string) && countDuplicates(string, strings) > max) {
                 findWord = string;
                 max = countDuplicates(string, strings);
             }
