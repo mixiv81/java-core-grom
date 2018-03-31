@@ -1,6 +1,5 @@
 package lesson17;
 
-
 public class Solution {
 
     public int countWords(String input) {
@@ -61,7 +60,7 @@ public class Solution {
         if (input.isEmpty())
             return null;
         String[] strings = input.toLowerCase().split(" ");
-        if (strings.length <2)
+        if (strings.length < 2)
             return null;
         String findWord = "";
         int max = 1;
@@ -76,6 +75,19 @@ public class Solution {
         else
             return null;
     }
+
+    public boolean validate(String address) {
+        if (address == null)
+            return false;
+        if (address.isEmpty())
+            return false;
+        String[] strings = address.trim().split("://");
+        if (!checkHttp(strings[0]))
+            return false;
+        String[] host = strings[1].split("\\.");
+        return host.length == 2 && checkDomen(host[1]) && checkAddress(host[0]) || host.length == 3 && checkwww(host[0]) && checkDomen(host[2]) && checkAddress(host[1]);
+    }
+
 
     private int countDuplicates(String string, String[] strings) {
         if (string == null)
@@ -100,5 +112,29 @@ public class Solution {
                 return false;
         }
         return true;
+    }
+
+    private boolean checkAddress(String input) {
+        if (input == null)
+            return false;
+        if (input.isEmpty())
+            return false;
+        for (char chars : input.toCharArray()) {
+            if (!Character.isLetterOrDigit(chars))
+                return false;
+        }
+        return true;
+    }
+
+    private boolean checkDomen(String address) {
+        return address.equals("com") || address.equals("net") || address.equals("org");
+    }
+
+    private boolean checkHttp(String http) {
+        return http.equals("http") || http.equals("https");
+    }
+
+    private boolean checkwww(String www) {
+        return www.equals("www");
     }
 }
