@@ -41,5 +41,4 @@ public class Exercises {
         }
         return res;
     }
-
 }
