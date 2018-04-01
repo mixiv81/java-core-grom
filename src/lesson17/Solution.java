@@ -81,7 +81,7 @@ public class Solution {
             return false;
         if (address.isEmpty())
             return false;
-        String[] strings = address.trim().split("://");
+        String[] strings = address.split("://");
         if (!checkHttp(strings[0]))
             return false;
         String[] host = strings[1].split("\\.");
