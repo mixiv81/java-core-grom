@@ -18,8 +18,8 @@ public class Solution {
 
     private boolean checkDomes(String address) {
         return (address.substring(address.length() - 4).equals(".com")
-                || address.substring(address.length() - 4).equals(".net")
-                || address.substring(address.length() - 4).equals(".com"));
+                || address.substring(address.length() - 4).equals(".org")
+                || address.substring(address.length() - 4).equals(".net"));
     }
 
     private boolean checkHttpAndSymbol(String address) {
