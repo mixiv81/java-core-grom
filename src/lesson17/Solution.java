@@ -4,20 +4,29 @@ public class Solution {
 
     public boolean validate(String address) {
         return address != null && !address.isEmpty()
-                && checkNameAddress(address)
-                && checkDomensAndProtocols(address);
+                && checkDomensAndProtocols(address)
+                && checkNameAddress(address);
+
     }
 
     private boolean checkDomensAndProtocols(String address) {
-        return (address.startsWith("http://") || address.startsWith("https://") && address.endsWith(".com") || address.endsWith(".net") || address.endsWith(".org"));
+        if (!address.startsWith("http://") && !address.startsWith("https://"))
+            return false;
+        if (!address.endsWith(".com") && !address.endsWith(".net") && !address.endsWith(".org"))
+        return false;
+        else
+            return true;
     }
 
     private boolean checkNameAddress(String address) {
-        if (address.contains("http://www.") || address.contains("https://www."))
-            return checkAddress(address.substring(address.indexOf('.') + 1, address.lastIndexOf('.')));
-        return (address.contains("http://") || address.contains("https://")) && checkAddress(address.substring(address.lastIndexOf('/') + 1, address.lastIndexOf('.')));
+        address = address.replaceAll("http://", "");
+        address = address.replaceAll("https://", "");
+        address = address.replaceAll("www.", "");
+        address = address.replaceAll(".com", "");
+        address = address.replaceAll(".net", "");
+        address = address.replaceAll(".org", "");
+        return address != null && !address.isEmpty() && checkAddress(address);
     }
-
 
     private boolean checkAddress(String input) {
         for (char ch : input.toCharArray()) {
