@@ -13,14 +13,11 @@ public class Solution {
     }
 
     private boolean checkNameAddress(String address) {
-        address = address.replaceAll("http://", "");
-        address = address.replaceAll("https://", "");
-        address = address.replaceAll("www.", "");
-        address = address.replaceAll(".com", "");
-        address = address.replaceAll(".net", "");
-        address = address.replaceAll(".org", "");
-        return checkAddress(address);
+        if (address.contains("http://www.") || address.contains("https://www."))
+            return checkAddress(address.substring(address.indexOf('.') + 1, address.lastIndexOf('.')));
+        return (address.contains("http://") || address.contains("https://")) && checkAddress(address.substring(address.lastIndexOf('/') + 1, address.lastIndexOf('.')));
     }
+
 
     private boolean checkAddress(String input) {
         for (char ch : input.toCharArray()) {
