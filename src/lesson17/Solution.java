@@ -1,12 +1,16 @@
 package lesson17;
 
 public class Solution {
+    public static void main(String[] args) {
+        String test = "https://www.gromcod77e.com";
+        System.out.println(validate(test));
+    }
 
-    public boolean validate(String address) {
+    public static boolean validate(String address) {
         return address != null && !address.isEmpty() && checkHttp(address) && checkDomen(address);
     }
 
-    private boolean checkAddress(String input) {
+    private static boolean checkAddress(String input) {
         if (input == null)
             return false;
         if (input.isEmpty())
@@ -18,11 +22,11 @@ public class Solution {
         return true;
     }
 
-    private boolean checkDomen(String address) {
+    private static boolean checkDomen(String address) {
         return address.substring(address.length() - 4).equals(".com") || address.substring(address.length() - 4).equals(".net") || address.substring(address.length() - 4).equals(".com");
     }
 
-    private boolean checkHttp(String address) {
+    private static boolean checkHttp(String address) {
         return address.substring(0, 7).equals("http://") && checkAddress(address.substring(7, address.length() - 4))
                 || address.substring(0, 8).equals("https://") && checkAddress(address.substring(8, address.length() - 4))
                 || address.substring(0, 11).equals("http://www.") && checkAddress(address.substring(11, address.length() - 4))
