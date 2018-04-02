@@ -77,15 +77,7 @@ public class Solution {
     }
 
     public boolean validate(String address) {
-        if (address == null)
-            return false;
-        if (address.isEmpty())
-            return false;
-        String[] strings = address.split("://");
-        if (!checkHttp(strings[0]))
-            return false;
-        String[] host = strings[1].split("\\.");
-        return host.length == 2 && checkDomen(host[1]) && checkAddress(host[0]) || host.length == 3 && checkwww(host[0]) && checkDomen(host[2]) && checkAddress(host[1]);
+        return address != null && !address.isEmpty() && checkDomen(address) && checkHttp(address) && checkHttp(address);
     }
 
 
@@ -127,14 +119,14 @@ public class Solution {
     }
 
     private boolean checkDomen(String address) {
-        return address.equals("com") || address.equals("net") || address.equals("org");
+        return address.substring(address.length() - 4).equals(".com") || address.substring(address.length() - 4).equals(".net") || address.substring(address.length() - 4).equals(".com");
     }
 
-    private boolean checkHttp(String http) {
-        return http.equals("http") || http.equals("https");
+    private boolean checkHttp(String address) {
+        return address.substring(0, 7).equals("http://") && checkAddress(address.substring(7, address.length() - 4))
+                || address.substring(0, 8).equals("https://") && checkAddress(address.substring(8, address.length() - 4))
+                || address.substring(0, 11).equals("http://www.") && checkAddress(address.substring(11, address.length() - 4))
+                || address.substring(0, 12).equals("https://www.") && checkAddress(address.substring(12, address.length() - 4));
     }
 
-    private boolean checkwww(String www) {
-        return www.equals("www");
-    }
 }
