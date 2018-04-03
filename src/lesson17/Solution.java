@@ -11,7 +11,7 @@ public class Solution {
     private boolean checkDomensAndProtocols(String address) {
         if (address == null || address.isEmpty())
             return false;
-        String[] strings = address.trim().toLowerCase().split("://");
+        String[] strings = address.split("://");
         if(strings.length < 2)
             return false;
         if (!strings[0].equals("http") && !strings[0].equals("https"))
