@@ -4,89 +4,53 @@ package lesson17;
 public class Solution {
 
     public boolean validate(String address) {
-        return address != null && !address.isEmpty()
-                && checkDomens(address)
-                && checkAmountProtocol(address)
-                && checkStrings(address)
-                && checkAmountDomens(address);
-    }
-
-    private String[] getProtocol() {
-        return new String[]{"http://www.", "https://www.", "http://", "https://"};
-    }
-
-    private String[] getDomens() {
-        return new String[]{".com", ".org", ".net"};
-    }
-
-    private boolean checkProtocol(String address) {
-        for (String protocol : getProtocol()) {
-            if (address.startsWith(protocol)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean checkAmountProtocol(String address) {
-        if (!checkProtocol(address))
+        if (!checkAddressNull(address))
             return false;
-        for (String protocol : getProtocol()) {
-            if (address.startsWith(protocol)) {
-                String[] strings = address.split("://");
-                if (strings.length > 2)
-                    return false;
-            }
-        }
+        if (checkProtocol(address) == null)
+            return false;
+        if (getNamesWithoutProtocol(address) == null)
+            return false;
+        if (checkDomens(address) == null)
+            return false;
+        if (!checkLetterAndDigit(address))
+            return false;
         return true;
     }
 
-    private boolean checkDomens(String address) {
-        for (String domen : getDomens()) {
-            if (address.endsWith(domen)) {
-                return true;
-            }
-        }
-        return false;
+    private boolean checkAddressNull(String address) {
+        return address != null && !address.isEmpty();
     }
 
-    private boolean checkAmountDomens(String address) {
-        if (!checkDomens(address))
-            return false;
-        if (!checkAmountProtocol(address))
-            return false;
-        String[] strings = address.split("\\.");
-        String[] domens = {"com", "org", "net"};
-        int count = 0;
-        for (String string : strings) {
-            for (String domen : domens) {
-                if (domen.equals("") || string.equals(""))
-                    return false;
-                if (string.equals(domen))
-                    count++;
-            }
-        }
-        return count == 1;
+    private String checkProtocol(String address) {
+        String[] strings = address.toLowerCase().split("://");
+        if (strings[0].equals("http") || strings[0].equals("https"))
+            return strings[1];
+        else
+            return null;
     }
 
-    private boolean checkStrings(String address) {
-        String[] protoc = address.split("://");
-        String[] strings = protoc[1].split("\\.");
-        int count = 0;
-        for (String string : strings) {
-            if (string.equals("http") || string.equals("https"))
-                return false;
-            if (!checkAddress(string))
-                return false;
+    private String[] getNamesWithoutProtocol(String address) {
+        String[] names = checkProtocol(address).split("\\.");
+        if (names.length == 2)
+            return names;
+        if (names.length == 3 && names[0].equals("www")) {
+            names = new String[]{names[1], names[2]};
         }
-        return true;
+        return names;
     }
 
-    private boolean checkAddress(String input) {
-        if (input.isEmpty())
-            return false;
-        for (char ch : input.toCharArray()) {
-            if (!Character.isLetterOrDigit(ch))
+    private String checkDomens(String address) {
+        if (getNamesWithoutProtocol(address)[1].equals("net")
+                || getNamesWithoutProtocol(address)[1].equals("com")
+                || getNamesWithoutProtocol(address)[1].equals("org")
+                && !getNamesWithoutProtocol(address)[0].equals(""))
+            return getNamesWithoutProtocol(address)[0];
+        return null;
+    }
+
+    private boolean checkLetterAndDigit(String address) {
+        for (char chars : checkDomens(address).toCharArray()) {
+            if (!Character.isLetterOrDigit(chars))
                 return false;
         }
         return true;
