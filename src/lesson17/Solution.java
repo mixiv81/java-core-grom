@@ -1,34 +1,49 @@
+
 package lesson17;
 
 public class Solution {
 
     public boolean validate(String address) {
-        return address != null && !address.isEmpty()
-                && checkDomensAndProtocols(address)
-                && checkNameAddress(address);
-
+        return address != null && !address.isEmpty() && checkDomensAndProtocols(address);
     }
+
 
     private boolean checkDomensAndProtocols(String address) {
-        if (!address.startsWith("http://") && !address.startsWith("https://"))
+        if (address == null || address.isEmpty())
             return false;
-        if (!address.endsWith(".com") && !address.endsWith(".net") && !address.endsWith(".org"))
-        return false;
-        else
-            return true;
-    }
+        String[] strings = address.trim().toLowerCase().split("://");
+        if(strings.length < 2)
+            return false;
+        if (!strings[0].equals("http") && !strings[0].equals("https"))
+            return false;
+        if (strings[1].equals("http") || strings[1].equals("https"))
+            return false;
 
-    private boolean checkNameAddress(String address) {
-        address = address.replaceAll("http://", "");
-        address = address.replaceAll("https://", "");
-        address = address.replaceAll("www.", "");
-        address = address.replaceAll(".com", "");
-        address = address.replaceAll(".net", "");
-        address = address.replaceAll(".org", "");
-        return address != null && !address.isEmpty() && checkAddress(address);
+        String[] namesAddress = strings[1].split("\\.");
+        if (namesAddress.length > 3)
+            return false;
+
+        if (namesAddress.length == 3) {
+            if (namesAddress[0].equals("www") && namesAddress[2].equals("net") || namesAddress[2].equals("com") || namesAddress[2].equals("org")) {
+                if (!namesAddress[1].equals("com") && !namesAddress[1].equals("org") && !namesAddress[1].equals("net")) {
+                    return checkAddress(namesAddress[1]);
+                }
+            }
+        }
+
+        if (namesAddress.length == 2) {
+            if (namesAddress[1].equals("net") || namesAddress[1].equals("com") || namesAddress[1].equals("org")) {
+                if (!namesAddress[0].equals("com") && !namesAddress[0].equals("org") && !namesAddress[0].equals("net")) {
+                    return checkAddress(namesAddress[0]);
+                }
+            }
+        }
+        return false;
     }
 
     private boolean checkAddress(String input) {
+        if (input.isEmpty())
+            return false;
         for (char ch : input.toCharArray()) {
             if (!Character.isLetterOrDigit(ch))
                 return false;
