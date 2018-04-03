@@ -4,38 +4,82 @@ package lesson17;
 public class Solution {
 
     public boolean validate(String address) {
-        return address != null && !address.isEmpty() && checkDomensAndProtocols(address);
+        return address != null && !address.isEmpty()
+                && checkDomens(address)
+                && checkAmountProtocol(address)
+                && checkStrings(address)
+                && checkAmountDomens(address);
     }
 
+    private String[] getProtocol() {
+        return new String[]{"http://www.", "https://www.", "http://", "https://"};
+    }
 
-    private boolean checkDomensAndProtocols(String address) {
-        if (address == null || address.isEmpty())
-            return false;
-        String[] strings = address.split("://");
-        if(strings.length < 2)
-            return false;
-        if (!strings[0].equals("http") && !strings[0].equals("https"))
-            return false;
-        if (strings[1].equals("http") || strings[1].equals("https"))
-            return false;
+    private String[] getDomens() {
+        return new String[]{".com", ".org", ".net"};
+    }
 
-        String[] namesAddress = strings[1].split("\\.");
-        if (namesAddress.length > 3)
-            return false;
-
-        if (namesAddress.length == 3) {
-            if (namesAddress[0].equals("www") && namesAddress[2].equals("net") || namesAddress[2].equals("com") || namesAddress[2].equals("org")) {
-                    return checkAddress(namesAddress[1]);
-                }
+    private boolean checkProtocol(String address) {
+        for (String protocol : getProtocol()) {
+            if (address.startsWith(protocol)) {
+                return true;
             }
-
-
-        if (namesAddress.length == 2) {
-            if (namesAddress[1].equals("net") || namesAddress[1].equals("com") || namesAddress[1].equals("org")) {
-                    return checkAddress(namesAddress[0]);
-                }
-            }
+        }
         return false;
+    }
+
+    private boolean checkAmountProtocol(String address) {
+        if (!checkProtocol(address))
+            return false;
+        for (String protocol : getProtocol()) {
+            if (address.startsWith(protocol)) {
+                String[] strings = address.split("://");
+                if (strings.length > 2)
+                    return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean checkDomens(String address) {
+        for (String domen : getDomens()) {
+            if (address.endsWith(domen)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean checkAmountDomens(String address) {
+        if (!checkDomens(address))
+            return false;
+        if (!checkAmountProtocol(address))
+            return false;
+        String[] strings = address.split("\\.");
+        String[] domens = {"com", "org", "net"};
+        int count = 0;
+        for (String string : strings) {
+            for (String domen : domens) {
+                if (domen.equals("") || string.equals(""))
+                    return false;
+                if (string.equals(domen))
+                    count++;
+            }
+        }
+        return count == 1;
+    }
+
+    private boolean checkStrings(String address) {
+        String[] protoc = address.split("://");
+        String[] strings = protoc[1].split("\\.");
+        int count = 0;
+        for (String string : strings) {
+            if (string.equals("http") || string.equals("https"))
+                return false;
+            if (!checkAddress(string))
+                return false;
+        }
+        return true;
     }
 
     private boolean checkAddress(String input) {
