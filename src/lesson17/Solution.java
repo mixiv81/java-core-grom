@@ -25,19 +25,16 @@ public class Solution {
 
         if (namesAddress.length == 3) {
             if (namesAddress[0].equals("www") && namesAddress[2].equals("net") || namesAddress[2].equals("com") || namesAddress[2].equals("org")) {
-                if (!namesAddress[1].equals("com") && !namesAddress[1].equals("org") && !namesAddress[1].equals("net")) {
                     return checkAddress(namesAddress[1]);
                 }
             }
-        }
+
 
         if (namesAddress.length == 2) {
             if (namesAddress[1].equals("net") || namesAddress[1].equals("com") || namesAddress[1].equals("org")) {
-                if (!namesAddress[0].equals("com") && !namesAddress[0].equals("org") && !namesAddress[0].equals("net")) {
                     return checkAddress(namesAddress[0]);
                 }
             }
-        }
         return false;
     }
 
