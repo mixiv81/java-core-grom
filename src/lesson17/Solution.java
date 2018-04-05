@@ -52,24 +52,46 @@ public class Solution {
     }
 
 
+
     public String mostCountedWord(String input) {
         if (input == null || input.isEmpty())
             return null;
         String[] words = input.trim().split(" ");
-        if (words.length < 2)
+        if (words.length == 1 && !checkLetters(words[0]))
             return null;
         int max = 0;
         String findWord = "";
+
         for (String word : words) {
-            if (countDuplicates(word, words) > max) {
-                max = countDuplicates(word, words);
+            if (countDuplicates(word, checkWordsIsValid(words)) > max) {
+                max = countDuplicates(word, checkWordsIsValid(words));
                 findWord = word;
             }
         }
-        if (!findWord.equals("") && max > 1)
+        if (!findWord.equals(""))
             return findWord;
         else
             return null;
+    }
+
+    private String[] checkWordsIsValid(String[] input) {
+        if (input == null)
+            return null;
+        int count = 0;
+        for (String anInput : input) {
+            if (!anInput.equals("") && checkLetters(anInput)) {
+                count++;
+            }
+        }
+        int countInd = 0;
+        String[] checkedWords = new String[count];
+        for (String anInput : input) {
+            if (!anInput.equals("") && checkLetters(anInput)) {
+                checkedWords[countInd] = anInput;
+                countInd++;
+            }
+        }
+        return checkedWords;
     }
 
     private boolean checkLetters(String input) {
@@ -79,6 +101,7 @@ public class Solution {
         }
         return true;
     }
+    
     private int countDuplicates(String string, String[] strings) {
         if (string == null || string.isEmpty())
             return 0;
