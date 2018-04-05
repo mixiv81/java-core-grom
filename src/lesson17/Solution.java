@@ -2,72 +2,68 @@ package lesson17;
 
 public class Solution {
 
-    public int countWords(String input) {
-        if (input == null)
-            return 0;
-        String[] strings = input.split(" ");
-        int count = 0;
-        for (String string : strings) {
-            if (checkNumbersAndSymbols(string))
-                count++;
-        }
-        return count;
+    public boolean validate(String address) {
+        if (address == null)
+            return false;
+        if (address.isEmpty())
+            return false;
+        String[] strings = address.trim().split("://");
+        if (strings.length < 2 || !checkProtocol(strings[0]))
+            return false;
+        String[] domen = strings[1].split("\\.");
+        return domen.length == 2 && checkDomen(domen[1]) && checkNames(domen[0])
+                && checkDomenPoint(address) && !checkDomen(domen[0]) && checkLengthDomenName(domen[0])
+
+                || domen.length == 3 && domen[0].equals("www") && checkDomen(domen[2]) && checkNames(domen[1])
+                && checkDomenPoint(address) && !checkDomen(domen[0]) && checkLengthDomenName(domen[1]);
     }
 
-    public String maxWord(String input) {
-        if (input == null)
-            return null;
-        if (input.isEmpty())
-            return null;
-        String[] strings = input.split(" ");
-        String findWord = "";
-        for (String string : strings) {
-            if (checkNumbersAndSymbols(string) && string.length() >= findWord.length()) {
-                findWord = string;
-            }
-        }
-        if (findWord.equals(""))
-            return null;
-        else
-            return findWord;
+    private boolean checkProtocol(String address) {
+        return address.equals("http") || address.equals("https");
     }
 
-    public String minWord(String input) {
+    private boolean checkDomen(String address) {
+        return address.equals("com") || address.equals("net") || address.equals("org");
+    }
+
+    private boolean checkDomenPoint(String address) {
+        String[] domens = {".com", ".net", ".org"};
+        for (String domen : domens) {
+            if (address.endsWith(domen))
+                return true;
+        }
+        return false;
+    }
+
+    private boolean checkNames(String input) {
         if (input == null)
-            return null;
+            return false;
         if (input.isEmpty())
-            return null;
-        String[] strings = input.split(" ");
-        String findWord = "";
-        for (String string : strings) {
-            if (checkNumbersAndSymbols(string)) {
-                findWord = string;
-            }
+            return false;
+        for (char ch : input.toCharArray()) {
+            if (!Character.isLetterOrDigit(ch))
+                return false;
         }
-        if (findWord.equals(""))
-            return null;
-        for (String string : strings) {
-            if (checkNumbersAndSymbols(string) && findWord.length() > string.length()) {
-                findWord = string;
-            }
-        }
-        return findWord;
+        return true;
+    }
+
+    private boolean checkLengthDomenName(String input) {
+        return (input.length() >= 3) && (input.length() <= 63);
     }
 
     public String mostCountedWord(String input) {
-        if (input == null)
+        if (input == null || input.isEmpty())
             return null;
-        if (input.isEmpty())
+        String[] words = input.trim().split(" ");
+        if (words.length == 1 && !checkLetters(words[0]))
             return null;
-        String[] strings = input.toLowerCase().split(" ");
-        if (strings.length < 2)
-            return null;
+        int max = 0;
         String findWord = "";
-        int max = 1;
-        for (String string : strings) {
-            if (checkNumbersAndSymbols(string) && countDuplicates(string, strings) > max) {
-                findWord = string;
-                max = countDuplicates(string, strings);
+
+        for (String word : words) {
+            if (countDuplicates(word, words) > max) {
+                max = countDuplicates(word, words);
+                findWord = word;
             }
         }
         if (!findWord.equals(""))
@@ -76,65 +72,22 @@ public class Solution {
             return null;
     }
 
-    public boolean validate(String address) {
-        if (address == null)
-            return false;
-        if (address.isEmpty())
-            return false;
-        String[] strings = address.split("://");
-        if (!checkHttp(strings[0]))
-            return false;
-        String[] host = strings[1].split("\\.");
-        return host.length == 2 && checkDomen(host[1]) && checkAddress(host[0]) || host.length == 3 && checkwww(host[0]) && checkDomen(host[2]) && checkAddress(host[1]);
+    private boolean checkLetters(String input) {
+        for (char ch : input.toCharArray()) {
+            if (!Character.isLetter(ch))
+                return false;
+        }
+        return true;
     }
 
-
     private int countDuplicates(String string, String[] strings) {
-        if (string == null)
-            return 0;
-        if (string.isEmpty())
+        if (string == null || string.isEmpty())
             return 0;
         int count = 0;
         for (String stringElem : strings) {
-            if (checkNumbersAndSymbols(string) && stringElem.equals(string))
+            if (checkLetters(string) && stringElem.equals(string))
                 count++;
         }
         return count;
-    }
-
-    private boolean checkNumbersAndSymbols(String input) {
-        if (input == null)
-            return false;
-        if (input.isEmpty())
-            return false;
-        for (int i = 0; i < input.length(); i++) {
-            if (!Character.isLetter(input.charAt(i)))
-                return false;
-        }
-        return true;
-    }
-
-    private boolean checkAddress(String input) {
-        if (input == null)
-            return false;
-        if (input.isEmpty())
-            return false;
-        for (char chars : input.toCharArray()) {
-            if (!Character.isLetterOrDigit(chars))
-                return false;
-        }
-        return true;
-    }
-
-    private boolean checkDomen(String address) {
-        return address.equals("com") || address.equals("net") || address.equals("org");
-    }
-
-    private boolean checkHttp(String http) {
-        return http.equals("http") || http.equals("https");
-    }
-
-    private boolean checkwww(String www) {
-        return www.equals("www");
     }
 }
