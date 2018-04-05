@@ -63,8 +63,8 @@ public class Solution {
         String findWord = "";
 
         for (String word : words) {
-            if (countDuplicates(word, checkWordsIsValid(words)) > max) {
-                max = countDuplicates(word, checkWordsIsValid(words));
+            if (countDuplicates(word, words) > max) {
+                max = countDuplicates(word, words);
                 findWord = word;
             }
         }
@@ -74,25 +74,7 @@ public class Solution {
             return null;
     }
 
-    private String[] checkWordsIsValid(String[] input) {
-        if (input == null)
-            return null;
-        int count = 0;
-        for (String anInput : input) {
-            if (!anInput.equals("") && checkLetters(anInput)) {
-                count++;
-            }
-        }
-        int countInd = 0;
-        String[] checkedWords = new String[count];
-        for (String anInput : input) {
-            if (!anInput.equals("") && checkLetters(anInput)) {
-                checkedWords[countInd] = anInput;
-                countInd++;
-            }
-        }
-        return checkedWords;
-    }
+
 
     private boolean checkLetters(String input) {
         for (char ch : input.toCharArray()) {
@@ -101,7 +83,7 @@ public class Solution {
         }
         return true;
     }
-    
+
     private int countDuplicates(String string, String[] strings) {
         if (string == null || string.isEmpty())
             return 0;
