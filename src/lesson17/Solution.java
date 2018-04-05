@@ -51,8 +51,6 @@ public class Solution {
         return (input.length() >= 3) && (input.length() <= 63);
     }
 
-
-
     public String mostCountedWord(String input) {
         if (input == null || input.isEmpty())
             return null;
@@ -73,8 +71,6 @@ public class Solution {
         else
             return null;
     }
-
-
 
     private boolean checkLetters(String input) {
         for (char ch : input.toCharArray()) {
