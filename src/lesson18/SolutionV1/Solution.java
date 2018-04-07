@@ -38,20 +38,16 @@ public class Solution {
         return numbers;
     }
 
-    private static boolean checkDigit(String input) {
-        for (char ch : input.toCharArray()) {
-            if (!Character.isDigit(ch))
-                return false;
-        }
-        return true;
-    }
-
     private static int countWords(String input){
         String[] words = input.trim().split(" ");
         int count = 0;
         for (String word : words) {
-            if (checkDigit(word) && !word.isEmpty())
+            try {
+                Integer.parseInt(word);
                 count++;
+            } catch (Exception e) {
+                System.out.println(word + " not a number");
+            }
         }
         return count;
     }
