@@ -23,7 +23,7 @@ public class Solution {
         if (text == null || text.isEmpty())
             return null;
         String[] words = text.trim().split(" ");
-        int[] numbers = new int[words.length];
+        int[] numbers = new int[countWords(text)];
         int count = 0;
         for (String word : words) {
             if (!word.isEmpty() && checkDigit(word)) {
@@ -34,6 +34,16 @@ public class Solution {
             }
         }
         return numbers;
+    }
+
+    private static int countWords(String input) {
+        String[] words = input.trim().split(" ");
+        int count = 0;
+        for (String word : words) {
+            if (checkDigit(word) && !word.isEmpty())
+                count++;
+        }
+        return count;
     }
 
     private static boolean checkDigit(String input) {
