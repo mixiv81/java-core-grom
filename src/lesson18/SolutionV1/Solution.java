@@ -46,7 +46,7 @@ public class Solution {
                 Integer.parseInt(word);
                 count++;
             } catch (Exception e) {
-                System.out.println(word + " not a number");
+                
             }
         }
         return count;
