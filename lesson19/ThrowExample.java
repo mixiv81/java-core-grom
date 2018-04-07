@@ -5,7 +5,7 @@ public class ThrowExample {
 
     public static void main(String[] args) {
         //test();
-        
+
         useOfTestMethod();
 
     }
