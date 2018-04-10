@@ -42,6 +42,8 @@ public class Controller {
             throw new NullPointerException("The storageFrom not detected");
         if (storageTo == null)
             throw new NullPointerException("The storageTo not detected");
+        if (storageFrom.getId() == storageTo.getId())
+            throw new Exception("you can't do it. The storageFrom id:" + storageFrom.getId() + " is the same as the storageTo id:" + storageTo.getId());
         long sizeFrom = 0;
         int countFrom = 0;
         for (int i = 0; i < storageFrom.getFiles().length; i++) {               // подсчет переносимых файлов и суммирование размера всех файлов
@@ -59,13 +61,16 @@ public class Controller {
                 sizeTo += storageTo.getFiles()[i].getSize();
         }
         if (countFrom > countTo) {                                              // проверка необходимомого места для переноса файлов
-            throw new Exception("The storage id:" + storageFrom.getId() + " can't be moved to the storage id:" + storageTo.getId() + " because there is't enough space");
+            throw new Exception("The storage id:" + storageFrom.getId() + " can't be moved to the storage id:" + storageTo.getId() + " because there isn't enough space");
         }
         if (sizeFrom + sizeTo > storageTo.getStorageSize())
-            throw new Exception("The storage id:" + storageFrom.getId() + " can't be moved to the storage id:" + storageTo.getId() + " because there is't enough size in storage id:" + storageTo.getId());
+            throw new Exception("The storage id:" + storageFrom.getId() + " can't be moved to the storage id:" + storageTo.getId() + " because there isn't enough size in storage id:" + storageTo.getId());
 
         for (int i = 0; i <storageFrom.getFiles().length; i++) {                //трансфер всех файлов
+            if (storageFrom.getFiles()[i] != null)
                 put(storageTo, storageFrom.getFiles()[i]);
+//            else
+//                throw new Exception("There aren't files in storage id:" + storageFrom.getId());
         }
         return storageTo.getFiles();
     }
@@ -77,8 +82,11 @@ public class Controller {
             throw new NullPointerException("The storageTo not detected");
         if (findFile(storageFrom, id) == null)
             throw new Exception("The file with id:" + id + " not found in storage id:" + storageFrom.getId());
+        if (storageFrom.getId() == storageTo.getId())
+            throw new Exception("you can't do it. The storageFrom id:" + storageFrom.getId() + " is the same as the storageTo id:" + storageTo.getId());
         if (findFile(storageTo, id) != null)
-            throw new Exception("The file id:" + id + "have already created in storage id:" + storageTo.getId());
+            throw new Exception("The file id:" + id + " have already created in storage id:" + storageTo.getId());
+
 
         put(storageTo, findFile(storageFrom, id));
 
