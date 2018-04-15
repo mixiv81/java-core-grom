@@ -32,9 +32,7 @@ public class Controller {
 
     protected File[] transferAll(Storage storageFrom, Storage storageTo) throws Exception {
 
-        validate.checkStorage(storageFrom, storageTo);
-
-        validate.countFiles(storageFrom, storageTo);
+        validate.checkStorageSize(storageFrom, storageTo);
 
         for (int i = 0; i < storageFrom.getFiles().length; i++) {                //трансфер всех файлов
             if (storageFrom.getFiles()[i] != null)

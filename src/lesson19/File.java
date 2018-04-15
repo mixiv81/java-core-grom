@@ -8,11 +8,15 @@ public class File {
     private String format;
     private long size;
 
-    public File(long id, String name, String format, long size) {
+    public File(long id, String name, String format, long size) throws Exception {
+
         this.id = id;
         this.name = name;
         this.format = format;
         this.size = size;
+
+        if (name.length() > 10)
+            throw new Exception("The name of file with id: " + id + " too long");
     }
 
     public long getId() {

@@ -12,9 +12,9 @@ public class Demo {
         File file2 = new File(2, "test2", "txt", 200);
         File file3 = new File(3, "test3", "png", 300);
         File file4 = new File(4, "test4", "png", 400);
-        File file5 = new File(5, "test567891", "txt", 500);
+        File file5 = new File(5, "test5671", "txt", 500);
         File file6 = null;
-        File file7 = new File(5, "test567hjjk89gf1", "txt", 500);
+        File file7 = new File(5, "test9gf1", "txt", 50000000);
         File file8 = new File(3, "test4", "png", 400);
         File file9 = new File(4, "test4", "pg", 40000000);
 
@@ -36,7 +36,7 @@ public class Demo {
 
 //        System.out.println(controller.put(storage, file5));
 //        System.out.println(controller.put(storage3, file5));
-//        System.out.println(controller.put(storage, file7));
+        System.out.println(controller.put(storage, file7));
 //        System.out.println(controller.put(storage1, file8));
 //        System.out.println(controller.put(storage2, file9));
 //
