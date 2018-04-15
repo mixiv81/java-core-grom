@@ -24,7 +24,7 @@ public class TransactionDAO {
         return transaction;
     }
 
-    private void validate(Transaction transaction) throws Exception {
+    private boolean validate(Transaction transaction) throws Exception {
         if (transaction.getAmount() > utils.getLimitSimpleTransactionAmount())
             throw new LimitExceeded("Transaction limit exceed " + transaction.getId() + ". Can't be saved");
 
@@ -45,17 +45,17 @@ public class TransactionDAO {
 
         for (String city : utils.getCities()) {
             if (transaction.getCity().equals(city)) {
-                continue;
+                break;
             }
             throw new BadRequestException("Transaction city impossible, id: " + transaction.getId() + ". Can't be saved");
         }
 
         for (Transaction tr : transactions) {
-            if (tr == null) {
-                continue;
+            if (tr != null && tr.equals(transaction)) {
+                throw new InternalServerException("Transaction  " + transaction.getId() + " can't be saved");
             }
-            throw new InternalServerException("Transaction  " + transaction.getId() + " can't be saved");
         }
+        return true;
     }
 
     public Transaction[] transactionList() {

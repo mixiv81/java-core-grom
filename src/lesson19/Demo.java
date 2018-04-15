@@ -14,8 +14,8 @@ public class Demo {
         File file4 = new File(4, "test4", "png", 400);
         File file5 = new File(5, "test567891", "txt", 500);
         File file6 = null;
-        File file7 = new File(5, "test56789gf1", "txt", 500);
-        File file8 = new File(4, "test4", "pg", 400);
+        File file7 = new File(5, "test567hjjk89gf1", "txt", 500);
+        File file8 = new File(3, "test4", "png", 400);
         File file9 = new File(4, "test4", "pg", 40000000);
 
         File[] files = {file1, file2, null, null, null, null};
@@ -27,7 +27,7 @@ public class Demo {
         String[] formatsSupported = {"txt", "png"};
 
         Storage storage = new Storage(1, files, formatsSupported, "Ukraine", 15000);
-        Storage storage1 = new Storage(2, files1, formatsSupported, "Ukraine", 1500);
+        Storage storage1 = new Storage(2, files1, formatsSupported, "Ukraine", 15000);
         Storage storage2 = new Storage(3, files2, formatsSupported, "Ukraine", 1500);
         Storage storage3 = new Storage(4, files3, formatsSupported, "Ukraine", 1500);
 
@@ -56,7 +56,7 @@ public class Demo {
 //        System.out.println(Arrays.toString(controller.transferFile(storage2,storage1, 0)));
 //        System.out.println(Arrays.toString(controller.transferFile(storage3,storage1, 6)));
 //        System.out.println(Arrays.toString(controller.transferFile(storage,storage3, 5)));
-        System.out.println(Arrays.toString(controller.transferFile(storage3, storage3, 2)));
+//        System.out.println(Arrays.toString(controller.transferFile(storage3, storage3, 2)));
 
 
     }
