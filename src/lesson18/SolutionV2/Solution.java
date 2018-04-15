@@ -4,15 +4,8 @@ import java.util.Arrays;
 
 public class Solution {
     public static void main(String[] args) {
-        String test = "   Ther e is Test  55 sdf / 0  b 5 or new 100 o5r sdfs  b jot. something  word op o5r";
-        String test1 = " ";
-        String test2 = "";
-        String test3 = "4.5 5 8,0 kkl  ";
-        String test4 = "0";
-
-        String[] tests = {test, test1, test2, test3, test4};
-
-        testArray(tests);
+        String test = "   Ther e is Test  55 sdf / 0 4.5 8,1 b 5 or new 100 o5r sdfs  b jot. something  word op o5r";
+        System.out.println(Arrays.toString(findNumbers(test)));
 
     }
 
@@ -47,10 +40,5 @@ public class Solution {
                 return false;
         }
         return true;
-    }
-
-    private static void testArray(String[] tests){
-        for (String test : tests)
-        System.out.println(Arrays.toString(findNumbers(test)));
     }
 }

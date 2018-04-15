@@ -7,6 +7,9 @@ import lesson20.task1.exception.UserNotFoundException;
 public class UserRepository {
     private User[] users;
 
+    public UserRepository(User[] users) {
+    }
+
     public User save(User user) throws Exception {
         if (user == null)
             throw new BadRequestException("Can't save null user");
@@ -70,5 +73,4 @@ public class UserRepository {
         }
         throw new UserNotFoundException("User with id: " + id + " not found");
     }
-
 }
