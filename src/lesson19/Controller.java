@@ -41,6 +41,7 @@ public class Controller {
         return storageTo.getFiles();
     }
 
+    
     protected File[] transferFile(Storage storageFrom, Storage storageTo, long id) throws Exception {
 
         validate.checkFileInStorage(storageFrom, storageTo, id);
