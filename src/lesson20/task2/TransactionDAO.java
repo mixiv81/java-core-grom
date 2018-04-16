@@ -21,6 +21,9 @@ public class TransactionDAO {
 
     private void validate(Transaction transaction) throws Exception {
 
+        if (transactions == null)
+            throw new InternalServerException("Array is null.");
+
         if (transaction == null)
             throw new InternalServerException("Transaction is null. Can't be saved");
 
@@ -38,7 +41,7 @@ public class TransactionDAO {
             throw new LimitExceeded("Transaction limit per day amount exceed " + transaction.getId() + ". Can't be saved");
         }
 
-        if (count + 1 > utils.getLimitTransactionsPerDayCount()) {
+        if (count + 1 >= utils.getLimitTransactionsPerDayCount()) {
             throw new LimitExceeded("Transaction limit per day count exceed " + transaction.getId() + ". Can't be saved");
         }
 
@@ -80,6 +83,9 @@ public class TransactionDAO {
                 count++;
         }
         Transaction[] findTransactions = new Transaction[count];
+        if (count == 0)
+            return findTransactions;
+
         int index = 0;
         for (Transaction tr : transactions) {
             if (tr != null) {
@@ -105,6 +111,9 @@ public class TransactionDAO {
                 count++;
         }
         Transaction[] findTransactions = new Transaction[count];
+        if (count == 0)
+            return findTransactions;
+
         int index = 0;
         for (Transaction tr : transactions) {
             if (tr != null && tr.getCity().equals(city)) {
@@ -130,6 +139,9 @@ public class TransactionDAO {
                 count++;
         }
         Transaction[] findTransactions = new Transaction[count];
+        if (count == 0)
+            return findTransactions;
+
         int index = 0;
         for (Transaction tr : transactions) {
             if (tr != null && tr.getAmount() == amount) {
