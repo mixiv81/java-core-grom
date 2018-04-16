@@ -19,15 +19,22 @@ public class Validate {
     }
 
 
-    // проверка файлов на формат, достуность свободного места
-    protected void checkFiles(Storage storage, File file) throws Exception {
+    // проверка файлов на формат,
+    protected void checkFormat(Storage storage, File file) throws Exception {
 
         for (String storage1 : storage.getFormatsSupported()) {
-            if (storage1.equals(file.getFormat()) && storage.getStorageSize() - getFilesSize(storage) > file.getSize()
-                    && findFile(storage, file.getId()) == null)
+            if (storage1.equals(file.getFormat()))
                 return;
         }
-        throw new Exception("The file with id: " + file.getId() + " can't be added to the storage with id: " + storage.getId());
+        throw new Exception("The file with id: " + file.getId() + " can't be added to the storage with id: " + storage.getId() + " because format of file is wrong");
+    }
+
+
+    //    достуность свободного места
+    protected void checkPlace(Storage storage, File file) throws Exception {
+
+        if (findFile(storage, file.getId()) != null || storage.getStorageSize() - getFilesSize(storage) < file.getSize())
+            throw new Exception("The file with id: " + file.getId() + " can't be added to the storage with id: " + storage.getId() + " there isn't enough place");
     }
 
 
@@ -35,14 +42,14 @@ public class Validate {
     // подсчет доступных мест
     protected void checkStorageSize(Storage storageFrom, Storage storageTo) throws Exception {
         int countFrom = 0;
-        for (int i = 0; i < storageFrom.getFiles().length; i++) {
-            if (storageFrom.getFiles()[i] != null) {
+        for (File file : storageFrom.getFiles()) {
+            if (file != null)
                 countFrom++;
             }
-        }
+
         int countTo = 0;
-        for (int i = 0; i < storageTo.getFiles().length; i++) {
-            if (storageTo.getFiles()[i] == null)
+        for (File file : storageTo.getFiles()) {
+            if (file == null)
                 countTo++;
         }
         if (countFrom > countTo || getFilesSize(storageFrom) + getFilesSize(storageTo) > storageTo.getStorageSize()) {                                              // проверка необходимомого места для переноса файлов
