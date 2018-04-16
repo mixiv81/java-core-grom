@@ -45,7 +45,7 @@ public class Validate {
         for (File file : storageFrom.getFiles()) {
             if (file != null)
                 countFrom++;
-            }
+        }
 
         int countTo = 0;
         for (File file : storageTo.getFiles()) {
@@ -59,11 +59,11 @@ public class Validate {
 
 
     // получить размер файлов в хранилище
-    private int getFilesSize(Storage storage) throws Exception {
+    private int getFilesSize(Storage storage) {
         int res = 0;
-        for (int i = 0; i < storage.getFiles().length; i++) {
-            if (storage.getFiles()[i] != null)
-                res += storage.getFiles()[i].getSize();
+        for (File file : storage.getFiles()) {
+            if (file != null)
+                res += file.getSize();
         }
         return res;
     }
