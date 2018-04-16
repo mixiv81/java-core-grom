@@ -6,7 +6,8 @@ public class Controller {
 
     protected File put(Storage storage, File file) throws Exception {
 
-        validate.checkFiles(storage, file);
+        validate.checkFormat(storage, file);
+        validate.checkPlace(storage, file);
 
         for (int i = 0; i < storage.getFiles().length; i++) {           //запись файла в хранилище
             if (storage.getFiles()[i] == null) {
@@ -41,7 +42,7 @@ public class Controller {
         return storageTo.getFiles();
     }
 
-    
+
     protected File[] transferFile(Storage storageFrom, Storage storageTo, long id) throws Exception {
 
         validate.checkFileInStorage(storageFrom, storageTo, id);
