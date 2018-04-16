@@ -25,7 +25,6 @@ public class TransactionDAO {
     }
 
     private boolean validate(Transaction transaction) throws Exception {
-
         if (transaction.getAmount() > utils.getLimitSimpleTransactionAmount())
             throw new LimitExceeded("Transaction limit exceed " + transaction.getId() + ". Can't be saved");
 
@@ -44,20 +43,18 @@ public class TransactionDAO {
             throw new LimitExceeded("Transaction limit per day count exceed " + transaction.getId() + ". Can't be saved");
         }
 
-        for (String city : utils.getCities()) {
-            if (transaction.getCity().equals(city)) {
-                break;
-            }
+        if (!checkCity(transaction)) {
             throw new BadRequestException("Transaction city impossible, id: " + transaction.getId() + ". Can't be saved");
         }
 
         for (Transaction tr : transactions) {
-            if (tr != null && tr.equals(transaction)) {
+            if (tr != null && tr.equals(transaction) || !isPlace(transaction)) {
                 throw new InternalServerException("Transaction  " + transaction.getId() + " can't be saved");
             }
         }
         return true;
     }
+
 
     public Transaction[] transactionList() {
         int count = 0;
@@ -70,45 +67,48 @@ public class TransactionDAO {
         for (Transaction tr : transactions) {
             if (tr != null) {
                 findTransactions[index] = tr;
+                index++;
             }
-            index++;
         }
         return findTransactions;
     }
+
 
     public Transaction[] transactionList(String city) {
         int count = 0;
         int index = 0;
         for (Transaction tr : transactions) {
-            if (tr.getCity().equals(city))
+            if (tr != null && tr.getCity().equals(city))
                 count++;
         }
         Transaction[] findTransactions = new Transaction[count];
         for (Transaction tr : transactions) {
-            if (tr.getCity().equals(city)) {
+            if (tr != null && tr.getCity().equals(city)) {
                 findTransactions[index] = tr;
+                index++;
             }
-            index++;
         }
         return findTransactions;
     }
+
 
     public Transaction[] transactionList(int amount) {
         int count = 0;
         int index = 0;
         for (Transaction tr : transactions) {
-            if (tr.getAmount() == amount)
+            if (tr != null && tr.getAmount() == amount)
                 count++;
         }
         Transaction[] findTransactions = new Transaction[count];
         for (Transaction tr : transactions) {
-            if (tr.getAmount() == amount) {
+            if (tr != null && tr.getAmount() == amount) {
                 findTransactions[index] = tr;
+                index++;
             }
-            index++;
         }
         return findTransactions;
     }
+
 
     private Transaction[] getTransactionsPerDay(Date dateOfCurTransaction) {
         Calendar calendar = Calendar.getInstance();
@@ -142,5 +142,22 @@ public class TransactionDAO {
             }
         }
         return result;
+    }
+
+
+    private boolean checkCity(Transaction transaction) {
+        for (String city : utils.getCities()) {
+            if (transaction.getCity().equals(city))
+                return true;
+        }
+        return false;
+    }
+
+    private boolean isPlace(Transaction transaction) {
+        for (Transaction tr : transactions) {
+            if (tr == null)
+                return true;
+        }
+        return false;
     }
 }

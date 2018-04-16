@@ -27,9 +27,17 @@ public class Demo {
 //        System.out.println();
 //        System.out.println(Arrays.toString(transactionDAO1.transactionList("Kiev")));
 //        System.out.println();
-//        System.out.println(Arrays.toString(transactionDAO1.transactionList(100)));
-        System.out.println();
-        System.out.println(transactionDAO1.save(transaction4));
+//        System.out.println(Arrays.toString(transactionDAO1.transactionList(10)));
+//        System.out.println();
+//        System.out.println(transactionDAO1.save(transaction4));
+
+//        System.out.println(Arrays.toString(controller.transactionList()));
+//        System.out.println();
+//        System.out.println(Arrays.toString(controller.transactionList("Kiev")));
+//        System.out.println();
+//        System.out.println(Arrays.toString(controller.transactionList(10)));
+//        System.out.println();
+//        System.out.println(controller.save(transaction4));
 
     }
 }
