@@ -1,15 +1,17 @@
 package lesson20.task2;
 
 
+import lesson20.task2.exception.InternalServerException;
+
 public class Controller {
 
-    TransactionDAO transactionDAO = new TransactionDAO();
+    private TransactionDAO transactionDAO = new TransactionDAO();
 
     public Transaction save(Transaction transaction) throws Exception {
         return transactionDAO.save(transaction);
     }
 
-    public Transaction[] transactionList() throws Exception {
+    public Transaction[] transactionList() throws InternalServerException {
         return transactionDAO.transactionList();
     }
 

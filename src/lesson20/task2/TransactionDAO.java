@@ -18,13 +18,12 @@ public class TransactionDAO {
     public TransactionDAO() {
     }
 
-    public Transaction save(Transaction transaction) throws Exception {
-        validate(transaction);
 
-        return transaction;
-    }
+    private void validate(Transaction transaction) throws Exception {
 
-    private boolean validate(Transaction transaction) throws Exception {
+        if (transaction == null)
+            throw new InternalServerException("Transaction is null. Can't be saved");
+
         if (transaction.getAmount() > utils.getLimitSimpleTransactionAmount())
             throw new LimitExceeded("Transaction limit exceed " + transaction.getId() + ". Can't be saved");
 
@@ -35,11 +34,11 @@ public class TransactionDAO {
             count++;
         }
 
-        if (sum > utils.getLimitTransactionsPerDayAmount()) {
+        if (sum + transaction.getAmount() >= utils.getLimitTransactionsPerDayAmount()) {
             throw new LimitExceeded("Transaction limit per day amount exceed " + transaction.getId() + ". Can't be saved");
         }
 
-        if (count > utils.getLimitTransactionsPerDayCount()) {
+        if (count + 1 > utils.getLimitTransactionsPerDayCount()) {
             throw new LimitExceeded("Transaction limit per day count exceed " + transaction.getId() + ". Can't be saved");
         }
 
@@ -47,23 +46,41 @@ public class TransactionDAO {
             throw new BadRequestException("Transaction city impossible, id: " + transaction.getId() + ". Can't be saved");
         }
 
+        if (!isPlace(transaction))
+            throw new InternalServerException("there isn't enough place for transaction  " + transaction.getId() + " can't be saved");
+
+
         for (Transaction tr : transactions) {
-            if (tr != null && tr.equals(transaction) || !isPlace(transaction)) {
+            if (tr != null && tr.equals(transaction)) {
                 throw new InternalServerException("Transaction  " + transaction.getId() + " can't be saved");
             }
         }
-        return true;
     }
 
 
-    public Transaction[] transactionList() {
+    public Transaction save(Transaction transaction) throws Exception {
+
+        validate(transaction);
+
+        for (Transaction tr : transactions) {
+            if (tr == null) {
+                tr = transaction;
+                return tr;
+            }
+        }
+        throw new InternalServerException("Transaction  " + transaction.getId() + " can't be saved");
+    }
+
+    public Transaction[] transactionList() throws InternalServerException {
+        if (transactions == null)
+            throw new InternalServerException("Tt's impossible to get list. Array is null.");
         int count = 0;
-        int index = 0;
         for (Transaction tr : transactions) {
             if (tr != null)
                 count++;
         }
         Transaction[] findTransactions = new Transaction[count];
+        int index = 0;
         for (Transaction tr : transactions) {
             if (tr != null) {
                 findTransactions[index] = tr;
@@ -74,14 +91,21 @@ public class TransactionDAO {
     }
 
 
-    public Transaction[] transactionList(String city) {
+    public Transaction[] transactionList(String city) throws Exception {
+
+        if (transactions == null)
+            throw new InternalServerException("Tt's impossible to get list. Array is null.");
+
+        if (city == null)
+            throw new BadRequestException("City is null. Try again");
+
         int count = 0;
-        int index = 0;
         for (Transaction tr : transactions) {
             if (tr != null && tr.getCity().equals(city))
                 count++;
         }
         Transaction[] findTransactions = new Transaction[count];
+        int index = 0;
         for (Transaction tr : transactions) {
             if (tr != null && tr.getCity().equals(city)) {
                 findTransactions[index] = tr;
@@ -92,14 +116,21 @@ public class TransactionDAO {
     }
 
 
-    public Transaction[] transactionList(int amount) {
+    public Transaction[] transactionList(int amount) throws Exception {
+
+        if (transactions == null)
+            throw new InternalServerException("Tt's impossible to get list. Array is null.");
+
+        if (amount <= 0)
+            throw new BadRequestException("Amount is wrong. Try again");
+
         int count = 0;
-        int index = 0;
         for (Transaction tr : transactions) {
             if (tr != null && tr.getAmount() == amount)
                 count++;
         }
         Transaction[] findTransactions = new Transaction[count];
+        int index = 0;
         for (Transaction tr : transactions) {
             if (tr != null && tr.getAmount() == amount) {
                 findTransactions[index] = tr;
@@ -161,3 +192,4 @@ public class TransactionDAO {
         return false;
     }
 }
+
