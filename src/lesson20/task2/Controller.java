@@ -9,15 +9,15 @@ public class Controller {
         return transactionDAO.save(transaction);
     }
 
-    public Transaction[] transactionList() {
+    public Transaction[] transactionList() throws Exception {
         return transactionDAO.transactionList();
     }
 
-    public Transaction[] transactionList(String city) {
+    public Transaction[] transactionList(String city) throws Exception {
         return transactionDAO.transactionList(city);
     }
 
-    public Transaction[] transactionList(int amount) {
+    public Transaction[] transactionList(int amount) throws Exception {
         return transactionDAO.transactionList(amount);
     }
 }
