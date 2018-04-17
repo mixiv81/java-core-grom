@@ -4,6 +4,7 @@ import lesson20.task2.exception.BadRequestException;
 import lesson20.task2.exception.InternalServerException;
 import lesson20.task2.exception.LimitExceeded;
 
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -25,7 +26,21 @@ public class TransactionDAO {
             throw new InternalServerException("Array is null.");
 
         if (transaction == null)
-            throw new InternalServerException("Transaction is null. Can't be saved");
+            throw new BadRequestException("Transaction is null. Can't be saved");
+
+        for (Transaction tr : transactions) {
+            if (tr != null && tr.equals(transaction)) {
+                throw new BadRequestException("Transaction  " + transaction.getId() + " can't be saved");
+            }
+        }
+
+        if (!isPlace()) {
+            throw new InternalServerException("there isn't enough place for transaction  " + transaction.getId() + " can't be saved");
+        }
+
+        if (!checkCity(transaction)) {
+            throw new BadRequestException("Transaction city impossible, id: " + transaction.getId() + ". Can't be saved");
+        }
 
         if (transaction.getAmount() > utils.getLimitSimpleTransactionAmount())
             throw new LimitExceeded("Transaction limit exceed " + transaction.getId() + ". Can't be saved");
@@ -44,35 +59,23 @@ public class TransactionDAO {
         if (count + 1 >= utils.getLimitTransactionsPerDayCount()) {
             throw new LimitExceeded("Transaction limit per day count exceed " + transaction.getId() + ". Can't be saved");
         }
-
-        if (!checkCity(transaction)) {
-            throw new BadRequestException("Transaction city impossible, id: " + transaction.getId() + ". Can't be saved");
-        }
-
-        if (!isPlace(transaction))
-            throw new InternalServerException("there isn't enough place for transaction  " + transaction.getId() + " can't be saved");
-
-
-        for (Transaction tr : transactions) {
-            if (tr != null && tr.equals(transaction)) {
-                throw new InternalServerException("Transaction  " + transaction.getId() + " can't be saved");
-            }
-        }
     }
+
 
 
     public Transaction save(Transaction transaction) throws Exception {
 
         validate(transaction);
 
-        for (Transaction tr : transactions) {
-            if (tr == null) {
-                tr = transaction;
-                return tr;
+        for (int i = 0; i < transactions.length; i++) {
+            if (transactions[i] == null) {
+                transactions[i] = transaction;
+                return transactions[i];
             }
         }
         throw new InternalServerException("Transaction  " + transaction.getId() + " can't be saved");
     }
+
 
     public Transaction[] transactionList() throws InternalServerException {
         if (transactions == null)
@@ -196,7 +199,7 @@ public class TransactionDAO {
         return false;
     }
 
-    private boolean isPlace(Transaction transaction) {
+    private boolean isPlace() {
         for (Transaction tr : transactions) {
             if (tr == null)
                 return true;
