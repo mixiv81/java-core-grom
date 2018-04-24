@@ -18,11 +18,14 @@ public class Demo {
 
         String string = "jhhghjg";
         Short sh = 5;
+        String string1 = " ";
 
 
         GeneralDAO<File> generalDAO = new GeneralDAO<>();
         GeneralDAO<String> generalDAO1 = new GeneralDAO<>();
         GeneralDAO<Short> generalDAO2 = new GeneralDAO<>();
+        GeneralDAO<String> generalDAO3 = new GeneralDAO<>();
+
 
 
 
@@ -39,10 +42,13 @@ public class Demo {
 //        System.out.println(generalDAO.save(file11));
         System.out.println(generalDAO1.save(string));
         System.out.println(generalDAO2.save(sh));
+        System.out.println(generalDAO3.save(string1));
+
 
         System.out.println(Arrays.deepToString(generalDAO.getAll()));
         System.out.println(Arrays.deepToString(generalDAO1.getAll()));
         System.out.println(Arrays.deepToString(generalDAO2.getAll()));
+        System.out.println(Arrays.deepToString(generalDAO3.getAll()));
 
     }
 }

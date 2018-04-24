@@ -1,7 +1,5 @@
 package lesson25.hw;
 
-import java.util.Arrays;
-
 public class GeneralDAO<T> {
     @SuppressWarnings("unchecked")
     private T[] types = (T[]) new Object[10];
