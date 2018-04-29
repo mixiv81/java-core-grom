@@ -29,26 +29,27 @@ public class Demo {
 
 
 
-        System.out.println(generalDAO.save(file1));
-        System.out.println(generalDAO.save(file2));
-        System.out.println(generalDAO.save(file3));
-        System.out.println(generalDAO.save(file4));
-        System.out.println(generalDAO.save(file5));
-        System.out.println(generalDAO.save(file6));
-        System.out.println(generalDAO.save(file7));
+//        System.out.println(generalDAO.save(file1));
+//        System.out.println(generalDAO.save(file2));
+//        System.out.println(generalDAO.save(file3));
+//        System.out.println(generalDAO.save(file4));
+//        System.out.println(generalDAO.save(file5));
+//        System.out.println(generalDAO.save(file6));
+//        System.out.println(generalDAO.save(file7));
 //        System.out.println(generalDAO.save(file8));
 //        System.out.println(generalDAO.save(file9));
 //        System.out.println(generalDAO.save(file10));
 //        System.out.println(generalDAO.save(file11));
-        System.out.println(generalDAO1.save(string));
-        System.out.println(generalDAO2.save(sh));
-        System.out.println(generalDAO3.save(string1));
+//        System.out.println(generalDAO1.save(string));
+//        System.out.println(generalDAO2.save(sh));
+//        System.out.println(generalDAO3.save(string1));
+//        System.out.println(generalDAO1.getAll());
 
 
         System.out.println(Arrays.deepToString(generalDAO.getAll()));
-        System.out.println(Arrays.deepToString(generalDAO1.getAll()));
-        System.out.println(Arrays.deepToString(generalDAO2.getAll()));
-        System.out.println(Arrays.deepToString(generalDAO3.getAll()));
+//        System.out.println(Arrays.deepToString(generalDAO1.getAll()));
+//        System.out.println(Arrays.deepToString(generalDAO2.getAll()));
+//        System.out.println(Arrays.deepToString(generalDAO3.getAll()));
 
     }
 }

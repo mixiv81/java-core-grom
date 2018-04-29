@@ -30,7 +30,7 @@ public class GeneralDAO<T> {
             }
         }
         if (count == 0)
-            throw new Exception("Array is empty");
+            return types;
 
         @SuppressWarnings("unchecked")
         T[] res = (T[]) new Object[count];
