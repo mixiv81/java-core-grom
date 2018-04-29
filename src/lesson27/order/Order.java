@@ -1,4 +1,4 @@
-package lesson26;
+package lesson27.order;
 
 public class Order {
     private long id;
@@ -37,7 +37,7 @@ public class Order {
 
     @Override
     public String toString() {
-        return "order{" +
+        return "Order{" +
                 "id=" + id +
                 ", price=" + price +
                 ", currency='" + currency + '\'' +

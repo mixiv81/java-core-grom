@@ -81,7 +81,7 @@ public abstract class Order {
 
     @Override
     public String toString() {
-        return "Order{" +
+        return "order{" +
                 "itemName='" + itemName + '\'' +
                 ", dateCreated=" + dateCreated +
                 ", dateConfirmed=" + dateConfirmed +

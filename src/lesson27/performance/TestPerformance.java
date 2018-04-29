@@ -1,4 +1,4 @@
-package lesson27;
+package lesson27.performance;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -92,7 +92,7 @@ public class TestPerformance {
         for (int i = 0; i < 100000; i++) {
             linkedList.get(50000);
         }
-        
+
         Date finish1 = new Date();
 
         diff = finish1.getTime() - start1.getTime();

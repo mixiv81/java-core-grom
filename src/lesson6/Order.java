@@ -23,7 +23,7 @@ public class Order {
         this.type = type;
     }
 
-//    public Order() {
+//    public order() {
 //    }
 
     public void confirmOrder() {
@@ -82,7 +82,7 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order{" +
+        return "order{" +
                 "id=" + id +
                 ", price=" + price +
                 ", dateCreated=" + dateCreated +
