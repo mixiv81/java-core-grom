@@ -9,6 +9,7 @@ public class Capability {
     private boolean isActive;
     private Date dateCreated;
 
+    
     public Capability(long id, String channelName, String fingerPrint, boolean isActive, Date dateCreated) {
         this.id = id;
         this.channelName = channelName;

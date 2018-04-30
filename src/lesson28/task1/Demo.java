@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Demo {
+
     public static void main(String[] args) {
         Capability capability1 = new Capability(1001, "test", "kkkk", false, null);
         Capability capability2 = new Capability(1002, null, "kkkk", false, new Date());

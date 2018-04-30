@@ -4,6 +4,7 @@ import java.util.Comparator;
 
 public class FullComparator implements Comparator<Capability> {
 
+
     @Override
     public int compare(Capability o1, Capability o2) {
         if (o1.getChannelName() != null && o2.getChannelName() != null && !o1.getChannelName().equals(o2))
