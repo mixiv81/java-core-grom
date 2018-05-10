@@ -2,7 +2,7 @@ package lesson30.task1;
 
 public enum TransactionType {
     FUNDING,
-    WITHDRAW,
+    WITHDRAWAL,
     TRANSFER,
     SALARY_INCOME
 }

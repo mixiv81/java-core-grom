@@ -16,7 +16,7 @@ public class UkrainianBankSystem implements BankSystem {
 
         user.setBalance(user.getBalance() - amount - getAmountOfCommission(user, amount));
 
-        createAndSaveTransaction(new Date(), TransactionType.WITHDRAW, amount, "withdraw");
+        createAndSaveTransaction(new Date(), TransactionType.WITHDRAWAL, amount, "withdraw");
     }
 
     @Override
