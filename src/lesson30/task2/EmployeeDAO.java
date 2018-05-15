@@ -5,7 +5,6 @@ import java.util.*;
 
 public class EmployeeDAO {
     private static ArrayList<Employee> employeesDAO = new ArrayList<>();
-    ProjectDAO projectDAO = new ProjectDAO();
     private ArrayList<Project> projects = new ArrayList<>();
 
 
