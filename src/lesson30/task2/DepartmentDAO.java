@@ -1,7 +1,7 @@
 package lesson30.task2;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+
 
 public class DepartmentDAO {
     private static ArrayList<Department> departmentDAO = new ArrayList<>();
