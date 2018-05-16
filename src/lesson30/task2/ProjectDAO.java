@@ -4,10 +4,10 @@ import java.util.*;
 
 
 public class ProjectDAO {
-    private static ArrayList<Project> projectsDAO = new ArrayList<>();
+    private static LinkedList<Project> projectsDAO = new LinkedList<>();
     private Set<Employee> employeesDAO = new HashSet<>();
 
-    public ArrayList<Project> getProjectsDAO() {
+    public LinkedList<Project> getProjectsDAO() {
         return projectsDAO;
     }
 

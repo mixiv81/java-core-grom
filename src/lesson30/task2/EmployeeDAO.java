@@ -9,13 +9,13 @@ public class EmployeeDAO {
 
 
     public EmployeeDAO() {
-        Employee employee1 = new Employee("Ihor", "Zhluktenko", new Date(), Position.DEVELOPER, new Department(DepartmentType.DEVELOPERS), projects);
-        Employee employee2 = new Employee("Oleg", "Slusar", new Date(), Position.ANALYST, new Department(DepartmentType.FINANCE), projects);
-        Employee employee3 = new Employee("Ann", "Timkina", new Date(), Position.FINANCE, new Department(DepartmentType.FINANCE), projects);
-        Employee employee4 = new Employee("Alex", "Pushkin", new Date(), Position.DESIGNER, new Department(DepartmentType.DEVELOPERS), projects);
-        Employee employee5 = new Employee("Sergey", "Sedov", new Date(), Position.TEAM_LEAD, new Department(DepartmentType.DEVELOPERS), projects);
-        Employee employee6 = new Employee("Max", "Popov", new Date(), Position.MANAGER, new Department(DepartmentType.DEVELOPERS), projects);
-        Employee employee7 = new Employee("Den", "Morosov", new Date(), Position.LEAD_DESIGNER, new Department(DepartmentType.DEVELOPERS), projects);
+        Employee employee1 = new Employee("Ihor", "Zhluktenko", new Date(), Position.DEVELOPER, new Department(DepartmentType.DEVELOPERS));
+        Employee employee2 = new Employee("Oleg", "Slusar", new Date(), Position.ANALYST, new Department(DepartmentType.FINANCE));
+        Employee employee3 = new Employee("Ann", "Timkina", new Date(), Position.FINANCE, new Department(DepartmentType.FINANCE));
+        Employee employee4 = new Employee("Alex", "Pushkin", new Date(), Position.DESIGNER, new Department(DepartmentType.DEVELOPERS));
+        Employee employee5 = new Employee("Sergey", "Sedov", new Date(), Position.TEAM_LEAD, new Department(DepartmentType.DEVELOPERS));
+        Employee employee6 = new Employee("Max", "Popov", new Date(), Position.MANAGER, new Department(DepartmentType.DEVELOPERS));
+        Employee employee7 = new Employee("Den", "Morosov", new Date(), Position.LEAD_DESIGNER, new Department(DepartmentType.DEVELOPERS));
 
         employeesDAO.add(employee1);
         employeesDAO.add(employee2);
@@ -31,18 +31,18 @@ public class EmployeeDAO {
             throw new Exception("Input data can't be null");
         LinkedList<Employee> findEmployees = new LinkedList<>();
         for (Employee employee : employeesDAO) {
-            if (employee != null && employee.getProjects().contains(projectName))
+            if (employee != null && employee.getProjects() != null && employee.getProjects().contains(projectName))
                 findEmployees.add(employee);
         }
         return findEmployees;
     }
 
-    public HashSet<Employee> employeesByDepartamentWithoutProject(DepartmentType departmentType) throws Exception {
+    public HashSet<Employee> employeesByDepartmentWithoutProject(DepartmentType departmentType) throws Exception {
         if (departmentType == null)
             throw new Exception("Input data can't be null");
         HashSet<Employee> findEmployees = new HashSet<>();
         for (Employee employee : employeesDAO) {
-            if (employee != null && employee.getDepartment().getType().equals(departmentType) && employee.getProjects() == null) {
+            if (employee != null && employee.getDepartment().getType().equals(departmentType) && employee.getProjects().size() == 0) {
                 findEmployees.add(employee);
             }
         }

@@ -14,7 +14,7 @@ public class Controller {
     }
 
     public HashSet<Employee> employeesByDepartamentWithoutProject(DepartmentType departmentType) throws Exception {
-        return employeeDAO.employeesByDepartamentWithoutProject(departmentType);
+        return employeeDAO.employeesByDepartmentWithoutProject(departmentType);
     }
 
     public HashSet<Employee> employeesWithoutProject() {

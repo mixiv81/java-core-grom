@@ -2,6 +2,7 @@ package lesson30.task2;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.Objects;
 
 public class Employee {
@@ -10,15 +11,14 @@ public class Employee {
     private Date dateHired;
     private Position position;
     private Department department;
-    private Collection projects;
+    private Collection projects = new LinkedList();
 
-    public Employee(String firstName, String lastName, Date dateHired, Position position, Department department, Collection projects) {
+    public Employee(String firstName, String lastName, Date dateHired, Position position, Department department) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateHired = dateHired;
         this.position = position;
         this.department = department;
-        this.projects = projects;
     }
 
     public String getFirstName() {
