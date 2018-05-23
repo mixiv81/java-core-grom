@@ -6,8 +6,8 @@ import java.util.HashSet;
 import java.util.LinkedList;
 
 public class Controller {
-    private EmployeeDAO employeeDAO;
-    private ProjectDAO projectDAO;
+    private EmployeeDAO employeeDAO = new EmployeeDAO();
+    private ProjectDAO projectDAO = new ProjectDAO();
 
     public LinkedList<Employee> employeesByProject(String projectName) throws Exception {
         return employeeDAO.employeesByProject(projectName);
