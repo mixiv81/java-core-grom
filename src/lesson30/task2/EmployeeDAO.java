@@ -35,8 +35,8 @@ public class EmployeeDAO {
         return findEmployees;
     }
 
-    public HashSet<Employee> employeesByDepartmentWithoutProject(DepartmentType departmentType) throws Exception {
-        HashSet<Employee> findEmployees = new HashSet<>();
+    public LinkedList<Employee> employeesByDepartmentWithoutProject(DepartmentType departmentType) throws Exception {
+        LinkedList<Employee> findEmployees = new LinkedList<>();
         for (Employee employee : employees) {
             if (employee != null && employee.getDepartment().getType().equals(departmentType) && employee.getProjects().size() == 0) {
                 findEmployees.add(employee);
@@ -45,8 +45,8 @@ public class EmployeeDAO {
         return findEmployees;
     }
 
-    public HashSet<Employee> employeesWithoutProject() {
-        HashSet<Employee> findEmployees = new HashSet<>();
+    public LinkedList<Employee> employeesWithoutProject() {
+        LinkedList<Employee> findEmployees = new LinkedList<>();
         for (Employee employee : employees) {
             if (employee != null && employee.getProjects().size() == 0) {
                 findEmployees.add(employee);
@@ -64,7 +64,7 @@ public class EmployeeDAO {
         if (lead.getProjects() == null)
             return findEmployees;
 
-        LinkedList<Project> projectsLead = new LinkedList<>();
+        ArrayList<Project> projectsLead = new ArrayList<>();
         projectsLead.addAll(lead.getProjects());
 
         for (Project project : projectsLead) {
@@ -85,7 +85,8 @@ public class EmployeeDAO {
         if (employee.getProjects() == null)
             return findEmployees;
 
-        LinkedList<Project> projects = (LinkedList<Project>) employee.getProjects();
+        ArrayList<Project> projects = new ArrayList<>();
+        projects.addAll(employee.getProjects());
 
         for (Project project : projects) {
             if (project != null)
@@ -109,9 +110,11 @@ public class EmployeeDAO {
         if (employee.getProjects() == null)
             return findEmployees;
 
-        LinkedList<Project> projects = (LinkedList<Project>) employee.getProjects();
+        ArrayList<Project> projects = new ArrayList<>();
+        projects.addAll(employee.getProjects());
 
-            for (Project project : projects) {
+
+        for (Project project : projects) {
                 if (project != null)
                     findEmployees.addAll(getEmployeesByProject(project));
             }
