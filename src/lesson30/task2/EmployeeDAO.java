@@ -64,7 +64,7 @@ public class EmployeeDAO {
         if (lead.getProjects() == null)
             return findEmployees;
 
-        ArrayList<Project> projectsLead = new ArrayList<>();
+        LinkedList<Project> projectsLead = new LinkedList<>();
         projectsLead.addAll(lead.getProjects());
 
         for (Project project : projectsLead) {
@@ -85,7 +85,7 @@ public class EmployeeDAO {
         if (employee.getProjects() == null)
             return findEmployees;
 
-        ArrayList<Project> projects = new ArrayList<>();
+        LinkedList<Project> projects = new LinkedList<>();
         projects.addAll(employee.getProjects());
 
         for (Project project : projects) {
@@ -110,7 +110,7 @@ public class EmployeeDAO {
         if (employee.getProjects() == null)
             return findEmployees;
 
-        ArrayList<Project> projects = new ArrayList<>();
+        LinkedList<Project> projects = new LinkedList<>();
         projects.addAll(employee.getProjects());
 
 
