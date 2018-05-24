@@ -9,13 +9,13 @@ public class EmployeeDAO {
 
 
     public EmployeeDAO() {
-        Employee employee1 = new Employee("Ihor", "Zhluktenko", new Date(), Position.DEVELOPER, new Department(DepartmentType.DEVELOPERS));
-        Employee employee2 = new Employee("Oleg", "Slusar", new Date(), Position.ANALYST, new Department(DepartmentType.FINANCE));
-        Employee employee3 = new Employee("Ann", "Timkina", new Date(), Position.FINANCE, new Department(DepartmentType.FINANCE));
-        Employee employee4 = new Employee("Alex", "Pushkin", new Date(), Position.DESIGNER, new Department(DepartmentType.DEVELOPERS));
-        Employee employee5 = new Employee("Sergey", "Sedov", new Date(), Position.TEAM_LEAD, new Department(DepartmentType.DEVELOPERS));
-        Employee employee6 = new Employee("Max", "Popov", new Date(), Position.MANAGER, new Department(DepartmentType.DEVELOPERS));
-        Employee employee7 = new Employee("Den", "Morosov", new Date(), Position.LEAD_DESIGNER, new Department(DepartmentType.DEVELOPERS));
+        Employee employee1 = new Employee("Ihor", "Zhluktenko", new Date(), Position.DEVELOPER, new Department(DepartmentType.DEVELOPERS), projects);
+        Employee employee2 = new Employee("Oleg", "Slusar", new Date(), Position.ANALYST, new Department(DepartmentType.FINANCE), projects);
+        Employee employee3 = new Employee("Ann", "Timkina", new Date(), Position.FINANCE, new Department(DepartmentType.FINANCE), projects);
+        Employee employee4 = new Employee("Alex", "Pushkin", new Date(), Position.DESIGNER, new Department(DepartmentType.DEVELOPERS), projects);
+        Employee employee5 = new Employee("Sergey", "Sedov", new Date(), Position.TEAM_LEAD, new Department(DepartmentType.DEVELOPERS), projects);
+        Employee employee6 = new Employee("Max", "Popov", new Date(), Position.MANAGER, new Department(DepartmentType.DEVELOPERS),projects);
+        Employee employee7 = new Employee("Den", "Morosov", new Date(), Position.LEAD_DESIGNER, new Department(DepartmentType.DEVELOPERS), projects);
 
         employees.add(employee1);
         employees.add(employee2);
@@ -85,8 +85,8 @@ public class EmployeeDAO {
         if (employee.getProjects() == null)
             return findEmployees;
 
-        LinkedList<Project> projects = new LinkedList<>();
-        projects.addAll(employee.getProjects());
+        ArrayList<Project> projects = (ArrayList<Project>) employee.getProjects();
+
 
         for (Project project : projects) {
             if (project != null)
@@ -110,8 +110,7 @@ public class EmployeeDAO {
         if (employee.getProjects() == null)
             return findEmployees;
 
-        LinkedList<Project> projects = new LinkedList<>();
-        projects.addAll(employee.getProjects());
+        ArrayList<Project> projects = (ArrayList<Project>) employee.getProjects();
 
 
         for (Project project : projects) {

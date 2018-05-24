@@ -4,24 +4,24 @@ import java.util.*;
 
 
 public class ProjectDAO {
-    private static LinkedList<Project> projectsDAO = new LinkedList<>();
-    private Set<Employee> employeesDAO = new HashSet<>();
+    private static ArrayList<Project> projects = new ArrayList<>();
+    private LinkedList<Employee> employees = new LinkedList<>();
 
-    public LinkedList<Project> getProjectsDAO() {
-        return projectsDAO;
+    public ArrayList<Project> getProjects() {
+        return projects;
     }
 
     public ProjectDAO() {
         Project project1 = new Project("aaa");
         Project project2 = new Project("bbb");
-        projectsDAO.add(project1);
-        projectsDAO.add(project2);
+        projects.add(project1);
+        projects.add(project2);
 
     }
     public Collection projectsByEmployee(Employee employee) throws Exception {
         if (employee == null)
             throw new Exception("Input data can't be null");
-        for (Employee em : employeesDAO) {
+        for (Employee em : employees) {
             if (em != null && em.equals(employee)) {
                 return em.getProjects();
             }
@@ -33,13 +33,13 @@ public class ProjectDAO {
         if (customer == null)
             throw new Exception("Input data can't be null");
 
-        LinkedList<Project> projects = new LinkedList<>();
+        LinkedList<Project> findProjects = new LinkedList<>();
 
-        for (Project project : projectsDAO){
+        for (Project project : projects){
             if (project != null && project.getCustomer().equals(customer)){
-                projects.add(project);
+                findProjects.add(project);
             }
         }
-        return projects;
+        return findProjects;
     }
 }

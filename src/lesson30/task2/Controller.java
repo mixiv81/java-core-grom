@@ -2,7 +2,6 @@ package lesson30.task2;
 
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.LinkedList;
 
 public class Controller {
@@ -13,11 +12,11 @@ public class Controller {
         return employeeDAO.employeesByProject(projectName);
     }
 
-    public HashSet<Employee> employeesByDepartamentWithoutProject(DepartmentType departmentType) throws Exception {
+    public LinkedList<Employee> employeesByDepartamentWithoutProject(DepartmentType departmentType) throws Exception {
         return employeeDAO.employeesByDepartmentWithoutProject(departmentType);
     }
 
-    public HashSet<Employee> employeesWithoutProject() {
+    public LinkedList<Employee> employeesWithoutProject() {
         return employeeDAO.employeesWithoutProject();
     }
 
