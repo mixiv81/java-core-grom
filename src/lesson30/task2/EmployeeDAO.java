@@ -56,7 +56,7 @@ public class EmployeeDAO {
     }
 
     public LinkedList<Employee> employeesByTeamLead(Employee lead) throws Exception {
-        if (lead.getPosition() != Position.TEAM_LEAD)
+        if (!lead.getPosition().equals(Position.TEAM_LEAD))
             throw new Exception("it is not team leader");
 
         LinkedList<Employee> findEmployees = new LinkedList<>();
@@ -76,11 +76,10 @@ public class EmployeeDAO {
     }
 
     public LinkedList<Employee> teamLeadsByEmployee(Employee employee) throws Exception {
-        if (employee.getPosition() == Position.TEAM_LEAD)
+        if (employee.getPosition().equals(Position.TEAM_LEAD))
             throw new Exception("it is team leader");
 
         LinkedList<Employee> findEmployees = new LinkedList<>();
-        LinkedList<Employee> findLeads = new LinkedList<>();
 
         if (employee.getProjects() == null)
             return findEmployees;
@@ -96,8 +95,10 @@ public class EmployeeDAO {
         if (findEmployees.size() == 0)
             return findEmployees;
 
+        LinkedList<Employee> findLeads = new LinkedList<>();
+
         for (Employee empl : findEmployees) {
-            if (empl.getPosition() == Position.TEAM_LEAD)
+            if (empl.getPosition().equals(Position.TEAM_LEAD))
                 findLeads.add(empl);
         }
         return findLeads;
