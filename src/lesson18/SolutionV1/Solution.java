@@ -1,4 +1,4 @@
-package lesson18.numbersV1;
+package lesson18.SolutionV1;
 
 import java.util.Arrays;
 
