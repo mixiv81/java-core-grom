@@ -16,7 +16,7 @@ public class Solution {
 
         for (Character character : chars) {
             if (character != ' ' && Character.isLetter(character)) {
-                map.put(character, countElements(chars, character));
+                map.compute(character, (key, value) -> value == null ? 1 : value + 1);
             }
         }
         return map;
@@ -31,29 +31,12 @@ public class Solution {
 
         for (String elem : strings) {
             if (checkLetters(elem)) {
-                map.put(elem, countWords(elem, strings));
+                map.compute(elem, (key, value) -> value == null ? 1 : value + 1);
             }
         }
         return map;
     }
 
-    private static int countElements(char[] characters, char ch) {
-        int findNumbers = 0;
-        for (Character character : characters) {
-            if (character.equals(ch))
-                findNumbers++;
-        }
-        return findNumbers;
-    }
-
-    private static int countWords(String string, String[] strings) {
-        int count = 0;
-        for (String stringElem : strings) {
-            if (stringElem.equals(string))
-                count++;
-        }
-        return count;
-    }
 
     private static boolean checkLetters(String input) {
         if (input.length() < 2)
