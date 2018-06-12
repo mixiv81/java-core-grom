@@ -16,7 +16,7 @@ public class Solution {
 
         for (Character character : chars) {
             if (character != ' ' && Character.isLetter(character)) {
-                map.compute(character, (key, value) -> value == null ? 1 : value + 1);
+                map.put(character, map.containsKey(character) ? map.get(character) + 1 : 1);
             }
         }
         return map;
@@ -31,7 +31,7 @@ public class Solution {
 
         for (String elem : strings) {
             if (checkLetters(elem)) {
-                map.compute(elem, (key, value) -> value == null ? 1 : value + 1);
+                map.put(elem, map.containsKey(elem) ? map.get(elem) + 1 : 1);
             }
         }
         return map;
@@ -49,4 +49,4 @@ public class Solution {
     }
 }
 
-//http://www.java67.com/2017/12/java-8-compute-and-computeifpresent.html
+
