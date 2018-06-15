@@ -20,6 +20,9 @@ public class FileToConsole {
             }
         }catch (IOException e){
             System.out.println("Reading from console failed");
+        }finally {
+            IOUtils.closeQuietly(reader);
+            IOUtils.closeQuietly(br);
         }
 
         readFile(pathFile);
