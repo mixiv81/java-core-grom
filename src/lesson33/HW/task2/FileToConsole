@@ -9,7 +9,7 @@ public class FileToConsole {
         InputStreamReader reader = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(reader);
 
-        System.out.println("Please. Enter file path to read");
+        System.out.println("Please, enter file path to read");
         String pathFile= null;
 
         try {
