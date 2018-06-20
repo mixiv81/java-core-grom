@@ -1,4 +1,4 @@
-package lesson34;
+package lesson34.task;
 
 import java.io.*;
 
