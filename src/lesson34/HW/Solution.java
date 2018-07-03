@@ -7,10 +7,17 @@ public class Solution {
 
         validate(fileFromPath, fileToPath);
 
-        writeToFile(fileToPath, readFromFile(fileFromPath));
+        StringBuffer copyFromFile = readFromFile(fileFromPath);
+        StringBuffer copyToFile = readFromFile(fileToPath);
 
-        cleanFile(fileFromPath);
-
+        try {
+            writeToFile(fileToPath, readFromFile(fileFromPath));
+            cleanFile(fileFromPath);
+        } catch (Exception e) {
+            writeToFile(fileToPath, copyToFile);
+            writeToFile(fileFromPath, copyFromFile);
+            throw new Exception("Transfer was wrong");
+        }
     }
 
     private StringBuffer readFromFile(String path) throws IOException {
