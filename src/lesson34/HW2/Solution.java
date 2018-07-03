@@ -18,8 +18,18 @@ public class Solution {
                 textFromFile = textFromFile.replace(sentence + ".", "");
             }
         }
-        writeToFile(fileToPath, res, true);
-        writeToFile(fileFromPath, new StringBuffer(textFromFile), false);
+
+        StringBuffer backupFrom = readFromFile(fileFromPath);
+        StringBuffer backupTo = readFromFile(fileToPath);
+
+        try {
+            writeToFile(fileToPath, res, true);
+            writeToFile(fileFromPath, new StringBuffer(textFromFile), false);
+        }catch (Exception e){
+            writeToFile(fileFromPath, backupFrom, false);
+            writeToFile(fileToPath, backupTo, false);
+            throw new Exception("Transfer was wrong");
+        }
     }
 
     private boolean validateLength(String input) {
@@ -39,8 +49,8 @@ public class Solution {
                 res.append(line);
                 res.append("\n");
             }
-            res.replace(res.length() - 1, res.length(), "");
-        } catch (IOException e) {
+//            res.replace(res.length() - 1, res.length(), "");
+            } catch (IOException e) {
             throw new IOException("Read from file  " + path + " failed");
         }
         return res;
