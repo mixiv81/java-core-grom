@@ -19,13 +19,22 @@ public class Solution {
             }
         }
 
+        writeWithBackup(fileFromPath, fileToPath, res, textFromFile);
+
+    }
+
+    private void writeWithBackup(String fileFromPath, String fileToPath, StringBuffer sentencesToFile, String sentencesFromFile) throws Exception {
+        StringBuffer backupTo = null;
         StringBuffer backupFrom = readFromFile(fileFromPath);
-        StringBuffer backupTo = readFromFile(fileToPath);
+
+        if (fileToPath.isEmpty()) {
+            backupTo = readFromFile(fileToPath);
+        }
 
         try {
-            writeToFile(fileToPath, res, true);
-            writeToFile(fileFromPath, new StringBuffer(textFromFile), false);
-        }catch (Exception e){
+            writeToFile(fileToPath, sentencesToFile, true);
+            writeToFile(fileFromPath, new StringBuffer(sentencesFromFile), false);
+        } catch (Exception e) {
             writeToFile(fileFromPath, backupFrom, false);
             writeToFile(fileToPath, backupTo, false);
             throw new Exception("Transfer was wrong");
@@ -50,7 +59,7 @@ public class Solution {
                 res.append("\n");
             }
 //            res.replace(res.length() - 1, res.length(), "");
-            } catch (IOException e) {
+        } catch (IOException e) {
             throw new IOException("Read from file  " + path + " failed");
         }
         return res;
@@ -63,7 +72,6 @@ public class Solution {
             throw new IOException("Write to file  " + path + " failed");
         }
     }
-
 
 
     private void validate(String fileFromPath, String fileToPath) throws Exception {
