@@ -7,8 +7,17 @@ public class Solution {
 
         validate(fileFromPath, fileToPath);
 
+        writeWithBackup(fileFromPath, fileToPath);
+
+    }
+
+    private void writeWithBackup(String fileFromPath, String fileToPath) throws Exception {
+        StringBuffer copyToFile = null;
         StringBuffer copyFromFile = readFromFile(fileFromPath);
-        StringBuffer copyToFile = readFromFile(fileToPath);
+
+        if (fileToPath.isEmpty()) {
+            copyToFile = readFromFile(fileToPath);
+        }
 
         try {
             writeToFile(fileToPath, readFromFile(fileFromPath));
@@ -28,7 +37,7 @@ public class Solution {
                 res.append(line);
                 res.append("\n");
             }
-//            res.replace(res.length() - 1, res.length(), "");
+            res.replace(res.length() - 1, res.length(), "");
         } catch (IOException e) {
             throw new IOException("Read from file " + path + " failed");
         }
