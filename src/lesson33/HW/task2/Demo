@@ -1,8 +1,0 @@
-package lesson33.HW.task2;
-
-public class Demo {
-    public static void main(String[] args) {
-        FileToConsole fileToConsole = new FileToConsole();
-        fileToConsole.readFileByConsolePath();
-    }
-}
